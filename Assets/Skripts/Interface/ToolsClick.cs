@@ -14,16 +14,24 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	private bool flag = false;
 	private Sprite current_img;
 	private Image img;
+    private Image seno;
+    private bool hover = false;
 
-	void Start() 
-	{
-		img = CountryImg.transform.GetChild (0).GetComponent<Image> ();
+	void Start()
+    {
+        seno = CountryImg.transform.GetChild(0).GetComponent<Image>();
+		img = CountryImg.transform.GetChild(1).GetComponent<Image>();
 		//tools = FindTools("Tool");
 	}
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         _cursor.gameObject.SetActive(false);
+        if (!hover)
+        {
+            seno.gameObject.SetActive(true);
+        }
+        seno.transform.position += new Vector3(20, 20, 20);
         img.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
         img.transform.position += new Vector3(20, 20, 20);
     }
@@ -31,12 +39,18 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerExit(PointerEventData eventData)
     {
         _cursor.gameObject.SetActive(true);
+        if (!hover)
+        {
+            seno.gameObject.SetActive(false);
+        }
+        seno.transform.position -= new Vector3(20, 20, 20);
         img.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
         img.transform.position -= new Vector3(20, 20, 20);
     }
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
+        hover = !hover;
 		foreach (GameObject panel in tools)
 			panel.SetActive (!flag);
 		flag = !flag;

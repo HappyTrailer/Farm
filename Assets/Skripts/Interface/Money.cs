@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
-public class Money : MonoBehaviour
+public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public Image cursor;
     public float money;
-    public float dalars;
     public Text moneytxt;
-    public Text dolarstxt;
+
+    private Image img;
 
     void Update()
     {
         moneytxt.text = money.ToString();
-        dolarstxt.text = dalars.ToString();
     }
 
     public void AddMoney(float m)
@@ -20,8 +21,15 @@ public class Money : MonoBehaviour
         this.money += m;
     }
 
-    public void AddDolars(float d)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        this.dalars += d;
+        transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+        cursor.gameObject.SetActive(false);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+        cursor.gameObject.SetActive(true);
     }
 }

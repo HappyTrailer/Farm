@@ -5,7 +5,6 @@ using System.Collections;
 
 public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Image cursor;
     public float max;
     public float current;
     public Image scr;
@@ -50,7 +49,6 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         transform.FindChild("level").transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
         scr.transform.parent.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-        cursor.gameObject.SetActive(false);
         notify.gameObject.SetActive(true);
     }
 
@@ -58,7 +56,6 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         transform.FindChild("level").transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
         scr.transform.parent.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-        cursor.gameObject.SetActive(true);
         notify.gameObject.SetActive(false);
     }
 }

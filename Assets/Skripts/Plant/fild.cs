@@ -88,15 +88,7 @@ public class fild : MonoBehaviour
                 }
                 break;
             //==========================================================
-            case "planted":
-                if (plant == null)
-                {
-                    dig = false;
-                    Debug.Log("planted ");
-
-                    plant = this.GetComponentInChildren<Plant>();
-                    plant.StartGrowing();
-                }
+            case "inventory":
                 break;
             //==========================================================
             case "arrow":
@@ -105,7 +97,7 @@ public class fild : MonoBehaviour
             case "sown":
                 break;
             //==========================================================
-            case "inventory":
+            case "planted":
                 if (plant == null)
                 {
                     dig = false;

@@ -7,7 +7,6 @@ using System.Collections;
 
 public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public RectTransform _cursor;
 	public Sprite texture;
 	public Image cursor;
 	public Image CountryImg;
@@ -33,6 +32,13 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
+        if (this.name == "inventory")
+        {
+            if(Inv.inventoryPanel.activeSelf == false)
+                Inv.inventoryPanel.SetActive(true);
+            else
+                Inv.inventoryPanel.SetActive(false);
+        }
 		cursor.sprite = texture;
         currentTool = this.name;
 	}
@@ -41,7 +47,6 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 	{
         hover = true;
         seno.gameObject.SetActive(true);
-        _cursor.gameObject.SetActive(false);
         img.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
 	}
 	
@@ -50,7 +55,6 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         hover = false;
         if (ToolCoice.currentTool != this.name)
             seno.gameObject.SetActive(false);
-        _cursor.gameObject.SetActive(true);
         img.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
 	}
 }

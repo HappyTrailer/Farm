@@ -7,7 +7,6 @@ using System.Collections;
 
 public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public RectTransform _cursor;
 	public Image CountryImg;
 	public GameObject[] tools;
 	//private List<GameObject> tools;
@@ -26,7 +25,6 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _cursor.gameObject.SetActive(false);
         if (!hover)
         {
             seno.gameObject.SetActive(true);
@@ -38,7 +36,6 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _cursor.gameObject.SetActive(true);
         if (!hover)
         {
             seno.gameObject.SetActive(false);

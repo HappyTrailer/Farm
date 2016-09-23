@@ -54,4 +54,13 @@ public class Sead : MonoBehaviour, Item {
         Plant pl = new Plant();
         return pl;
     }
+
+    public void Init(Sead sead)
+    {
+        this.Id = sead.Id;
+        this.ItemPrice = sead.ItemPrice;
+        this.ItemType = sead.ItemType;
+        this.SpritePath = sead.SpritePath;
+        this.ItemName = sead.ItemName;
+    }
 }

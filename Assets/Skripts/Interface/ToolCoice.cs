@@ -34,8 +34,11 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 	{
         if (this.name == "inventory")
         {
-            if(Inv.inventoryPanel.activeSelf == false)
+            if (Inv.inventoryPanel.activeSelf == false)
+            {
                 Inv.inventoryPanel.SetActive(true);
+                Inv.FillInventory();
+            }
             else
                 Inv.inventoryPanel.SetActive(false);
         }

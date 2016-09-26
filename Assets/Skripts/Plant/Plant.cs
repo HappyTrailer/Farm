@@ -3,12 +3,17 @@ using System.Collections;
 
 public class Plant : MonoBehaviour
 {
-    public float growthTime; // время роста
     public double timeFactor; // множитель времени роста 
     public int countFruit; // количество плодов
     public int iterationFruit; // количество раз плодоношения
-    public int timeBetweenMat; // время между созреваниями
     public int countExpiriens; // количество опыта
+
+    public float stageOne;
+    public float stageTwo;
+    public float stageThree;
+    public float stageFour;
+
+    private float currentStage;
 
     public Sprite pl1; // семена
     public Sprite pl2; // росток
@@ -17,25 +22,10 @@ public class Plant : MonoBehaviour
     public Sprite pl5; // плодоношение
     public Sprite pl6; // сухой стебель
 
-    float TimerGrow;  //переменная таймер роста
-    float oneFive;  // время одной стадии роста
-
     public bool planted;   // посжено ли растение
     bool growing;
 
     public string stage;   //стадия роста
-    int stagetime;
-
-    void Growth()
-    {
-        stagetime = (int)TimerGrow;
-        ChangeStage();
-
-        if (TimerGrow >= 0 && growing)
-        {
-            TimerGrow -= Time.deltaTime;
-        }
-    }
 
     public void EndGrow()
     {
@@ -44,59 +34,48 @@ public class Plant : MonoBehaviour
 
     public void GrowingProces()
     {
-        if (planted)
+        if (planted && growing)
         {
-            Growth();
-        }
-    }
-
-    void ChangeStage()
-    {
-        if (stagetime == (int)growthTime)
-        {
-            if (stage != "stage1")
+            if (stage == "stage1" && currentStage > 0)
             {
-                stage = "stage1";
-                growing = true;
-                Debug.Log(stagetime + " stage1");
-                shangeSprite("stage1");
+                currentStage -= Time.deltaTime;
+                if (currentStage <= 0)
+                {
+                    currentStage = stageTwo;
+                    stage = "stage2";
+                    shangeSprite("stage2");
+                }
             }
-        }
-        else if (stagetime == (int)growthTime - oneFive)
-        {
-            if (stage != "stage2")
+            else if (stage == "stage2" && currentStage > 0)
             {
-                stage = "stage2";
-                Debug.Log(stagetime + " stage2");
-                shangeSprite("stage2");
+                currentStage -= Time.deltaTime;
+                if (currentStage <= 0)
+                {
+                    currentStage = stageThree;
+                    stage = "stage3";
+                    shangeSprite("stage3");
+                }
             }
-        }
-        else if (stagetime == (int)growthTime - oneFive * 2)
-        {
-            if (stage != "stage3")
+            else if (stage == "stage3" && currentStage > 0)
             {
-                stage = "stage3";
-                Debug.Log(stagetime + " stage3");
-                shangeSprite("stage3");
+                currentStage -= Time.deltaTime;
+                if (currentStage <= 0)
+                {
+                    currentStage = stageFour;
+                    stage = "stage4";
+                    shangeSprite("stage4");
+                }
             }
-        }
-        else if (stagetime == (int)growthTime - oneFive * 3)
-        {
-            if (stage != "stage4")
+            else if (stage == "stage4" && currentStage > 0)
             {
-                stage = "stage4";
-                Debug.Log(stagetime + " stage4");
-                shangeSprite("stage4");
-            }
-        }
-        else if (stagetime == (int)growthTime - oneFive * 4)
-        {
-            if (stage != "stage5")
-            {
-                Debug.Log(stagetime + " stage5");
-                stage = "stage5";
-                shangeSprite("stage5");
-                growing = false;
+                currentStage -= Time.deltaTime;
+                if (currentStage <= 0)
+                {
+                    currentStage = 0;
+                    stage = "stage5"; 
+                    shangeSprite("stage5");
+                    growing = false;
+                }
             }
         }
     }
@@ -130,24 +109,19 @@ public class Plant : MonoBehaviour
     {
         if (stage == "stage5")
         {
-            Debug.Log("Item drop");
-
             if (iterationFruit >= 1)
             {
-                Debug.Log("new iteration");
                 iterationFruit--;
+                stage = "stage3";
                 shangeSprite("stage3");
-                TimerGrow = growthTime - oneFive * 2;
+                currentStage = stageThree;
                 growing = true;
             }
             else
             {
                 if (stage != "stage6")
                 {
-                    TimerGrow = 0;
-                    Debug.Log("end");
                     stage = "stage6";
-                    Debug.Log(stagetime + " stage6");
                     shangeSprite("stage6");
                 }
             }
@@ -157,8 +131,9 @@ public class Plant : MonoBehaviour
     public void StartGrowing()
     {
         planted = true;
-        oneFive = (growthTime / 5);
-        TimerGrow = growthTime;
-        stage = "satge1";
+        growing = true;
+        currentStage = stageOne;
+        stage = "stage1";
+        shangeSprite("stage1");
     }
 }

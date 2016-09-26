@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.EventSystems;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-public class Sead : MonoBehaviour, Item, IPointerClickHandler
+public class SeadInventory: Item
 {
-
     public int id;
     public int itemPrice;
     public string itemName;
@@ -49,26 +49,5 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler
     public void Drop()
     {
         throw new System.NotImplementedException();
-    }
-
-    public Plant GetPlantFromSead()
-    {
-        Plant pl = new Plant();
-        return pl;
-    }
-
-    public void Init(SeadInventory sead)
-    {
-        this.Id = sead.Id;
-        this.ItemPrice = sead.ItemPrice;
-        this.ItemType = sead.ItemType;
-        this.SpritePath = sead.SpritePath;
-        this.ItemName = sead.ItemName;
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        ToolCoice.currentTool = "planted";
-        
     }
 }

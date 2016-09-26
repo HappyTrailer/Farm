@@ -23,7 +23,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     void Update()
     {
-        if (ToolCoice.currentTool == this.name)
+        if (currentTool == this.name)
             seno.gameObject.SetActive(true);
         seno.transform.Rotate(Vector3.forward * -1);
         if(seno.gameObject.activeSelf && ToolCoice.currentTool != this.name && !hover)
@@ -31,7 +31,9 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     }
 
 	public void OnPointerClick(PointerEventData eventData)
-	{
+    {
+        cursor.sprite = texture;
+        currentTool = this.name;
         if (this.name == "inventory")
         {
             if (Inv.inventoryPanel.activeSelf == false)
@@ -40,10 +42,11 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
                 Inv.FillInventory();
             }
             else
+            {
+                currentTool = "arrow";
                 Inv.inventoryPanel.SetActive(false);
+            }
         }
-		cursor.sprite = texture;
-        currentTool = this.name;
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)

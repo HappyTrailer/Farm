@@ -100,6 +100,7 @@ public class fild : MonoBehaviour
             case "planted":
                 if (plant == null)
                 {
+                    ToolCoice.currentTool = "arrow";
                     dig = false;
                     Debug.Log("planted ");
 

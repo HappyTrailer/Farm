@@ -69,6 +69,6 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         ToolCoice.currentTool = "planted";
-        
+        Inv.inventoryPanel.SetActive(false);
     }
 }

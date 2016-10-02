@@ -44,6 +44,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             else
             {
                 currentTool = "arrow";
+                Inv.actionPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
             }
         }

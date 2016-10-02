@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class Sead : MonoBehaviour, Item, IPointerClickHandler
+public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     public int id;
@@ -10,6 +11,8 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler
     public string itemName;
     public string itemType;
     public string spritePath;
+
+    private bool hovererd = false;
 
     public int ItemPrice
     {
@@ -66,9 +69,35 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler
         this.ItemName = sead.ItemName;
     }
 
+    void Update()
+    {
+        if (!hovererd)
+        {
+            Color a = GetComponent<Image>().color;
+            if (Inv.currSelect != transform.GetSiblingIndex())
+                GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
+        }
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        ToolCoice.currentTool = "planted";
-        Inv.inventoryPanel.SetActive(false);
+        Inv.actionPanel.SetActive(true);
+        Inv.currSelect = transform.GetSiblingIndex();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        hovererd = true;
+        Color a = GetComponent<Image>().color;
+        if (Inv.currSelect != transform.GetSiblingIndex())
+            GetComponent<Image>().color = new Color(a.r, a.g, a.b, 1);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        hovererd = false;
+        Color a = GetComponent<Image>().color;
+        if (Inv.currSelect != transform.GetSiblingIndex())
+            GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
     }
 }

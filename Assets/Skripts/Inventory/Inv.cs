@@ -6,16 +6,20 @@ using System.Collections.Generic;
 public class Inv : MonoBehaviour {
 
     public static GameObject inventoryPanel;
-    public GameObject inv;
-    public Sprite buff;
+    public GameObject inv; 
+    public static GameObject actionPanel;
+    public GameObject act;
+    public static int currSelect = -1;
 
     void Start()
     {
         inventoryPanel = inv;
+        actionPanel = act;
     }
 
     public static void FillInventory()
     {
+        currSelect = -1;
         List<Item> items = new List<Item>();
         items.Add(new SeadInventory() { Id = 1, ItemPrice = 100, ItemType = "sead", SpritePath = "pl1", ItemName = "Kartoxa" });
         items.Add(new SeadInventory() { Id = 2, ItemPrice = 70, ItemType = "sead", SpritePath = "pl2", ItemName = "Tomat" });
@@ -26,7 +30,7 @@ public class Inv : MonoBehaviour {
         {
             if (items.Count > i)
             {
-                inventoryPanel.transform.GetChild(i).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].SpritePath);
+                inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].SpritePath);
                 inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Sead>().Init(items[i] as SeadInventory);
             }
         }

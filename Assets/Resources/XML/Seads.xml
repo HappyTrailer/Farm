@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<seads>
+	<sead>
+		<id>1</id>
+		<price>50</price>
+		<mainSprite>pl1</mainSprite>
+		<name>Tomat</name>
+		<countFruit>10</countFruit>
+		<iterationFruit>1</iterationFruit>
+		<countExpiriens>1</countExpiriens>
+		<stageOneTime>10</stageOneTime>
+		<stageTwoTime>20</stageTwoTime>
+		<stageThreeTime>30</stageThreeTime>
+		<stageFourTime>40</stageFourTime>
+		<spritStage1>pl1</spritStage1>
+		<spritStage2>pl2</spritStage2>
+		<spritStage3>pl3</spritStage3>
+		<spritStage4>pl4</spritStage4>
+		<spritStage5>pl5</spritStage5>
+		<spritStage6>pl6</spritStage6>
+	</sead>
+	<sead>
+		<id>2</id>
+		<price>75</price>
+		<mainSprite>pl2</mainSprite>
+		<name>Potato</name>
+		<countFruit>1</countFruit>
+		<iterationFruit>1</iterationFruit>
+		<countExpiriens>1</countExpiriens>
+		<stageOneTime>10</stageOneTime>
+		<stageTwoTime>20</stageTwoTime>
+		<stageThreeTime>30</stageThreeTime>
+		<stageFourTime>40</stageFourTime>
+		<spritStage1>pl1</spritStage1>
+		<spritStage2>pl2</spritStage2>
+		<spritStage3>pl3</spritStage3>
+		<spritStage4>pl4</spritStage4>
+		<spritStage5>pl5</spritStage5>
+		<spritStage6>pl6</spritStage6>
+	</sead>
+</seads>

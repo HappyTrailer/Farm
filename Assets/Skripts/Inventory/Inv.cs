@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Xml;
 
 public class Inv : MonoBehaviour {
 
@@ -21,11 +22,38 @@ public class Inv : MonoBehaviour {
     {
         currSelect = -1;
         List<Item> items = new List<Item>();
-        items.Add(new SeadInventory() { Id = 1, ItemPrice = 100, ItemType = "sead", SpritePath = "pl1", ItemName = "Kartoxa" });
-        items.Add(new SeadInventory() { Id = 2, ItemPrice = 70, ItemType = "sead", SpritePath = "pl2", ItemName = "Tomat" });
-        items.Add(new SeadInventory() { Id = 3, ItemPrice = 20, ItemType = "sead", SpritePath = "pl3", ItemName = "Potato" });
-        items.Add(new SeadInventory() { Id = 4, ItemPrice = 35, ItemType = "sead", SpritePath = "pl4", ItemName = "Lime" });
-        items.Add(new SeadInventory() { Id = 5, ItemPrice = 99, ItemType = "sead", SpritePath = "pl5", ItemName = "Grusha" });
+        XmlDocument buff;
+        TextAsset bindataBuff;
+        TextAsset bindata = Resources.Load("XML/Inventory") as TextAsset; 
+        XmlDocument invDoc = new XmlDocument();
+        invDoc.LoadXml(bindata.text);
+        XmlElement root = invDoc.DocumentElement;
+        foreach(XmlElement item in root)
+        {
+            switch(item.ChildNodes[1].InnerText)
+            {
+                case "sead":
+                    buff = new XmlDocument();
+                    bindataBuff = Resources.Load("XML/Seads") as TextAsset;
+                    buff.LoadXml(bindataBuff.text);
+                    XmlElement rootS = buff.DocumentElement;
+                    foreach (XmlElement sead in rootS)
+                    {
+                        if (sead.ChildNodes[0].InnerText == item.ChildNodes[0].InnerText)
+                        {
+                            items.Add(new SeadInventory() 
+                            {
+                                Id = System.Convert.ToInt32(sead.ChildNodes[0].InnerText),
+                                ItemPrice = System.Convert.ToInt32(sead.ChildNodes[1].InnerText),
+                                ItemType = "sead",
+                                SpritePath = sead.ChildNodes[2].InnerText,
+                                ItemName = sead.ChildNodes[3].InnerText
+                            });
+                        }
+                    }
+                    break;
+            }
+        }
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
             if (items.Count > i)

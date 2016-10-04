@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Xml;
+using System;
 
 public class Plant : MonoBehaviour
 {
+    public int fruitId;
     public double timeFactor; // множитель времени роста 
     public int countFruit; // количество плодов
     public int iterationFruit; // количество раз плодоношения
@@ -80,6 +83,34 @@ public class Plant : MonoBehaviour
         }
     }
 
+    public void Init(Sead sead)
+    {
+        XmlDocument seadXml = new XmlDocument();
+        TextAsset bindata  = Resources.Load("XML/Seads") as TextAsset; 
+        seadXml.LoadXml(bindata.text);
+        XmlElement root = seadXml.DocumentElement;
+        foreach(XmlElement item in root)
+        {
+            if (item.ChildNodes[0].InnerText == sead.Id.ToString())
+            {
+                countFruit = Convert.ToInt32(item.ChildNodes[4].InnerText);
+                iterationFruit = Convert.ToInt32(item.ChildNodes[5].InnerText);
+                countExpiriens = Convert.ToInt32(item.ChildNodes[6].InnerText);
+                stageOne = Convert.ToSingle(item.ChildNodes[7].InnerText);
+                stageTwo = Convert.ToSingle(item.ChildNodes[8].InnerText);
+                stageThree = Convert.ToSingle(item.ChildNodes[9].InnerText);
+                stageFour = Convert.ToSingle(item.ChildNodes[10].InnerText);
+                pl1 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[11].InnerText);
+                pl2 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[12].InnerText);
+                pl3 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[13].InnerText);
+                pl4 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[14].InnerText);
+                pl5 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[15].InnerText);
+                pl6 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[16].InnerText);
+                fruitId = Convert.ToInt32(item.ChildNodes[17].InnerText);
+            }
+        }
+    }
+
     void shangeSprite(string s)
     {
         switch (s)
@@ -109,6 +140,7 @@ public class Plant : MonoBehaviour
     {
         if (stage == "stage5")
         {
+
             if (iterationFruit >= 1)
             {
                 iterationFruit--;

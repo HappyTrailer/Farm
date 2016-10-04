@@ -10,6 +10,7 @@ public class Inv : MonoBehaviour {
     public GameObject inv; 
     public static GameObject actionPanel;
     public GameObject act;
+    public static Sead currentSead; 
     public static int currSelect = -1;
 
     void Start()
@@ -51,6 +52,8 @@ public class Inv : MonoBehaviour {
                             });
                         }
                     }
+                    break;
+                case "harvest":
                     break;
             }
         }

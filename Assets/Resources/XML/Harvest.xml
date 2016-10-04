@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<fruits>
+	<fruit>
+		<id>1</id>
+		<price>50</price>
+		<mainSprite>fruit1</mainSprite>
+		<name>Tomat</name>
+	</fruit>
+	<fruit>
+		<id>2</id>
+		<price>75</price>
+		<mainSprite>fruit2</mainSprite>
+		<name>Potato</name>
+	</fruit>
+</fruits>

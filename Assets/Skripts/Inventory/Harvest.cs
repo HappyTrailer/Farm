@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public int id;
     public int itemPrice;
@@ -53,15 +53,6 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         throw new System.NotImplementedException();
     }
 
-    public void Init(SeadInventory sead)
-    {
-        this.Id = sead.Id;
-        this.ItemPrice = sead.ItemPrice;
-        this.ItemType = sead.ItemType;
-        this.SpritePath = sead.SpritePath;
-        this.ItemName = sead.ItemName;
-    }
-
     void Update()
     {
         if (!hovererd)
@@ -76,7 +67,6 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
     {
         Inv.actionPanel.SetActive(true);
         Inv.currSelect = transform.GetSiblingIndex();
-        Inv.currentSead = this;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

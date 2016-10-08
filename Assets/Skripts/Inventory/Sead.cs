@@ -10,6 +10,7 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
     public string itemName;
     public string itemType;
     public string spritePath;
+    public int itemCount;
 
     private bool hovererd = false;
 
@@ -53,13 +54,14 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         throw new System.NotImplementedException();
     }
 
-    public void Init(SeadInventory sead)
+    public void Init(ItemInInventory sead)
     {
         this.Id = sead.Id;
         this.ItemPrice = sead.ItemPrice;
         this.ItemType = sead.ItemType;
         this.SpritePath = sead.SpritePath;
         this.ItemName = sead.ItemName;
+        this.ItemCount = sead.ItemCount;
     }
 
     void Update()
@@ -93,5 +95,12 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         Color a = GetComponent<Image>().color;
         if (Inv.currSelect != transform.GetSiblingIndex())
             GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
+    }
+
+
+    public int ItemCount
+    {
+        get { return itemCount; }
+        set { itemCount = value; }
     }
 }

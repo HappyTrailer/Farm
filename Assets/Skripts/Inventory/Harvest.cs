@@ -10,6 +10,7 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
     public string itemName;
     public string itemType;
     public string spritePath;
+    public int itemCount;
 
     private bool hovererd = false;
 
@@ -83,5 +84,12 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
         Color a = GetComponent<Image>().color;
         if (Inv.currSelect != transform.GetSiblingIndex())
             GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
+    }
+
+
+    public int ItemCount
+    {
+        get { return itemCount; }
+        set { itemCount = value; }
     }
 }

@@ -140,7 +140,7 @@ public class Plant : MonoBehaviour
     {
         if (stage == "stage5")
         {
-
+            Inv.GetHarvestToInventory(countFruit, fruitId);
             if (iterationFruit >= 1)
             {
                 iterationFruit--;

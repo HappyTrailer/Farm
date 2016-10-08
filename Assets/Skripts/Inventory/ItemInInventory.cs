@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class SeadInventory: Item
+[Serializable]
+public class ItemInInventory: Item
 {
     public int id;
     public int itemPrice;
     public string itemName;
     public string itemType;
     public string spritePath;
+    public int itemCount;
 
     public int ItemPrice
     {
@@ -49,5 +51,12 @@ public class SeadInventory: Item
     public void Drop()
     {
         throw new System.NotImplementedException();
+    }
+
+
+    public int ItemCount
+    {
+        get { return itemCount; }
+        set { itemCount = value; }
     }
 }

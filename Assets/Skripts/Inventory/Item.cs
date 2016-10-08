@@ -8,6 +8,7 @@ public interface Item
     string ItemName { get; set; }
     string ItemType { get; set; }
     string SpritePath { get; set; }
+    int ItemCount { get; set; }
 
     void Sale();
     void Drop();

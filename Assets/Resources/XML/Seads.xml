@@ -6,12 +6,12 @@
 		<mainSprite>pl4</mainSprite>
 		<name>Tomat</name>
 		<countFruit>10</countFruit>
-		<iterationFruit>1</iterationFruit>
+		<iterationFruit>0</iterationFruit>
 		<countExpiriens>1</countExpiriens>
-		<stageOneTime>10</stageOneTime>
-		<stageTwoTime>20</stageTwoTime>
-		<stageThreeTime>30</stageThreeTime>
-		<stageFourTime>40</stageFourTime>
+		<stageOneTime>1</stageOneTime>
+		<stageTwoTime>1</stageTwoTime>
+		<stageThreeTime>1</stageThreeTime>
+		<stageFourTime>1</stageFourTime>
 		<spritStage1>pl1</spritStage1>
 		<spritStage2>pl2</spritStage2>
 		<spritStage3>pl3</spritStage3>

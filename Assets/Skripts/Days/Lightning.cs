@@ -11,6 +11,8 @@ public class Lightning : MonoBehaviour
     public float min;
     public float hour;
 
+    public float magicHour;
+
     private Light lg;
     private float currentTime;
     private float oneUnitLight;
@@ -47,10 +49,10 @@ public class Lightning : MonoBehaviour
         hour = DateTime.Now.Hour;
         min = DateTime.Now.Minute;
         sec = DateTime.Now.Second;
-        if (hour >= 0 && hour < 3)
-            currentTime = ((24 - 3 + hour) * 60 * 60) + (min * 60) + sec;
+        if (hour >= 0 && hour < magicHour)
+            currentTime = ((24 - magicHour + hour) * 60 * 60) + (min * 60) + sec;
         else
-            currentTime = ((hour - 3) * 60 * 60) + (min * 60) + sec;
+            currentTime = ((hour - magicHour) * 60 * 60) + (min * 60) + sec;
         //=================================================
         if (currentTime >= total * 2)
             currentTime = 0;
@@ -62,10 +64,10 @@ public class Lightning : MonoBehaviour
 
         timeCounter = currentTime * oneUnitTime;
 
-        float x = (float)Math.Sin(timeCounter) * 550;
-        float y = (float)Math.Cos(timeCounter) * 350;
+        float x = (float)Math.Sin(timeCounter) * 60;
+        float y = (float)Math.Cos(timeCounter) * 25;
 
-        sun.transform.position = new Vector3(-x, -y, 450);
-        mon.transform.position = new Vector3(x, y, 450);
+        sun.transform.localPosition = new Vector3(-x, -y, 0);
+        mon.transform.localPosition = new Vector3(x, y, 0);
     }
 }

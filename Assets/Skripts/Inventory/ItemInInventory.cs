@@ -43,17 +43,6 @@ public class ItemInInventory: Item
         set { id = value; }
     }
 
-    public void Sale()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Drop()
-    {
-        throw new System.NotImplementedException();
-    }
-
-
     public int ItemCount
     {
         get { return itemCount; }

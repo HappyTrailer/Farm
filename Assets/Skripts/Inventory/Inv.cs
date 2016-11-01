@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
 
 public class Inv : MonoBehaviour {
 
@@ -21,6 +22,11 @@ public class Inv : MonoBehaviour {
         items = Load();
         inventoryPanel = inv;
         actionPanel = act;
+    }
+
+    public static void DropItem(int id)
+    {
+        Inv.items.RemoveAt(id);
     }
 
     public static void GetHarvestToInventory(int countFruit, int fruitId)
@@ -121,10 +127,20 @@ public class Inv : MonoBehaviour {
             if (items.Count > i)
             {
                 inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].SpritePath);
+                inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[i].ItemCount.ToString();
                 if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
                     Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
                 inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Sead>().Init(items[i] as ItemInInventory);
             }
+            else
+            {
+                inventoryPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
+                inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
+                inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "New";
+                if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
+                    Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
+            }
+
         }
     }
 

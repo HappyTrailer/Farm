@@ -44,16 +44,6 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         set { id = value; }
     }
 
-    public void Sale()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Drop()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void Init(ItemInInventory sead)
     {
         this.Id = sead.Id;

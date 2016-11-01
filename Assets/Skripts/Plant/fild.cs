@@ -103,6 +103,11 @@ public class fild : MonoBehaviour
                     ToolCoice.currentTool = "arrow";
                     dig = false;
                     Debug.Log("planted ");
+                    Inv.items[Inv.currSelect].ItemCount -= 1;
+                    if (Inv.items[Inv.currSelect].ItemCount <= 0)
+                    {
+                        Inv.DropItem(Inv.currSelect);
+                    }
                     this.GetComponentInChildren<Plant>().Init(Inv.currentSead);
                     plant = this.GetComponentInChildren<Plant>();
                     plant.StartGrowing();

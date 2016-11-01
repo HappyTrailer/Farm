@@ -10,6 +10,4 @@ public interface Item
     string SpritePath { get; set; }
     int ItemCount { get; set; }
 
-    void Sale();
-    void Drop();
 }

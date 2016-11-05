@@ -100,12 +100,13 @@ public class fild : MonoBehaviour
             case "planted":
                 if (plant == null)
                 {
-                    ToolCoice.currentTool = "arrow";
                     dig = false;
                     Debug.Log("planted ");
                     Inv.items[Inv.currSelect].ItemCount -= 1;
                     if (Inv.items[Inv.currSelect].ItemCount <= 0)
                     {
+                        ToolCoice.currentTool = "arrow";
+                        ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow_cartoon_blue_left 1");
                         Inv.DropItem(Inv.currSelect);
                     }
                     this.GetComponentInChildren<Plant>().Init(Inv.currentSead);

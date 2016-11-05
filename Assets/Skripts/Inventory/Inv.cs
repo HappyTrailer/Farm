@@ -136,7 +136,7 @@ public class Inv : MonoBehaviour {
             {
                 inventoryPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
                 inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
-                inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "New";
+                inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "";
                 if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
                     Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
             }

@@ -8,7 +8,8 @@ using System.Collections;
 public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 	public Sprite texture;
-	public Image cursor;
+    public Image cursor; 
+    public static Image globalCursor;
 	public Image CountryImg;
     private Image img;
     private Image seno;
@@ -17,6 +18,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     void Start()
     {
+        globalCursor = cursor;
         seno = CountryImg.transform.GetChild(0).GetComponent<Image>();
         img = CountryImg.transform.GetChild(1).GetComponent<Image>();
     }

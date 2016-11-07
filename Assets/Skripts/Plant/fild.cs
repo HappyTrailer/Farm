@@ -28,16 +28,27 @@ public class fild : MonoBehaviour
     {
         GetMouseValue();
     }
-
-    void Update()
+    void Watering()
     {
-        if (plant != null)
+        if (watering)
         {
-            plant.GrowingProces();
+            this.GetComponent<SpriteRenderer>().sprite = digedField;
+
+        }
+        else {
+            this.GetComponent<SpriteRenderer>().sprite = sandField;
+        }
+    }
+    void Update()   // В методе апдейт происходит просчет роста растения
+    {
+        Watering();
+        if (plant != null)  // если растение существует продолжать просчет роста
+        {
+            plant.GrowingProces();  // метод просчета роста
         }
     }
 
-    void GetMouseValue()
+    void GetMouseValue()                   // метод обработки клика мышкой по полю в зависимости от типа курсора
     {
         switch (ToolCoice.currentTool)
         {
@@ -101,14 +112,16 @@ public class fild : MonoBehaviour
                 if (plant == null)
                 {
                     dig = false;
-                    Debug.Log("planted ");
+                   // Debug.Log("planted ");
                     Inv.items[Inv.currSelect].ItemCount -= 1;
+
                     if (Inv.items[Inv.currSelect].ItemCount <= 0)
                     {
                         ToolCoice.currentTool = "arrow";
                         ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow_cartoon_blue_left 1");
                         Inv.DropItem(Inv.currSelect);
                     }
+
                     this.GetComponentInChildren<Plant>().Init(Inv.currentSead);
                     plant = this.GetComponentInChildren<Plant>();
                     plant.StartGrowing();

@@ -10,12 +10,12 @@ public class Plant : MonoBehaviour
     public int countFruit; // количество плодов
     public int iterationFruit; // количество раз плодоношения
     public int countExpiriens; // количество опыта
-
+    //*************************Стадии роста по времени*****************
     public float stageOne;
     public float stageTwo;
     public float stageThree;
     public float stageFour;
-
+    //-----------------------------------------------------------------
     private float currentStage;
 
     public Sprite pl1; // семена
@@ -96,16 +96,19 @@ public class Plant : MonoBehaviour
                 countFruit = Convert.ToInt32(item.ChildNodes[4].InnerText);
                 iterationFruit = Convert.ToInt32(item.ChildNodes[5].InnerText);
                 countExpiriens = Convert.ToInt32(item.ChildNodes[6].InnerText);
+
                 stageOne = Convert.ToSingle(item.ChildNodes[7].InnerText);
                 stageTwo = Convert.ToSingle(item.ChildNodes[8].InnerText);
                 stageThree = Convert.ToSingle(item.ChildNodes[9].InnerText);
                 stageFour = Convert.ToSingle(item.ChildNodes[10].InnerText);
+
                 pl1 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[11].InnerText);
                 pl2 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[12].InnerText);
                 pl3 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[13].InnerText);
                 pl4 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[14].InnerText);
                 pl5 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[15].InnerText);
                 pl6 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[16].InnerText);
+
                 fruitId = Convert.ToInt32(item.ChildNodes[17].InnerText);
             }
         }

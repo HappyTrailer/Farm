@@ -28,20 +28,25 @@ public class fild : MonoBehaviour
     {
         GetMouseValue();
     }
-    void Watering()
+    void Watering(bool water)
     {
-        if (watering)
+        if (water)
         {
-            this.GetComponent<SpriteRenderer>().sprite = digedField;
+            this.GetComponent<SpriteRenderer>().sprite = sandField;
+            watering = !watering;
+            Debug.Log("1");
 
         }
         else {
-            this.GetComponent<SpriteRenderer>().sprite = sandField;
+            
+            this.GetComponent<SpriteRenderer>().sprite = digedField;
+            watering = !watering;
+            Debug.Log("2");
         }
     }
     void Update()   // В методе апдейт происходит просчет роста растения
     {
-        Watering();
+        
         if (plant != null)  // если растение существует продолжать просчет роста
         {
             plant.GrowingProces();  // метод просчета роста
@@ -70,11 +75,10 @@ public class fild : MonoBehaviour
                 break;
             //==========================================================
             case "watering":
-                if (!watering)
-                {
-                    watering = true;
-                    this.GetComponent<SpriteRenderer>().sprite = digedField;
-                }
+
+                Watering(watering);
+                
+      
                 break;
             //==========================================================
             case "weed":

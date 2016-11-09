@@ -23,30 +23,34 @@ public class fild : MonoBehaviour
     bool arrow;    //курсор
 
 
+    float wateringTime = 10.0f;
     Plant plant;        // тут поле с класом растения
     public void OnMouseUp()
     {
         GetMouseValue();
     }
-    void Watering(bool water)
+    void Watering()
     {
-        if (water)
+        
+    }
+    void ChangeWatering()
+    {
+
+        if (watering)
         {
             this.GetComponent<SpriteRenderer>().sprite = sandField;
             watering = !watering;
-            Debug.Log("1");
-
+            
         }
         else {
             
             this.GetComponent<SpriteRenderer>().sprite = digedField;
             watering = !watering;
-            Debug.Log("2");
         }
     }
     void Update()   // В методе апдейт происходит просчет роста растения
     {
-        
+        Watering();
         if (plant != null)  // если растение существует продолжать просчет роста
         {
             plant.GrowingProces();  // метод просчета роста
@@ -76,7 +80,7 @@ public class fild : MonoBehaviour
             //==========================================================
             case "watering":
 
-                Watering(watering);
+                ChangeWatering();
                 
       
                 break;

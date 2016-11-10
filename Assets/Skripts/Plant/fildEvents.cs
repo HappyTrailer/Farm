@@ -3,12 +3,9 @@ using System.Collections;
 
 
 public class fildEvents : MonoBehaviour {
-    //список запланированых событий
-    //осушение грядок появление сорняков,  вредителей 
+    int idFild;
+
     
 
-	// Update is called once per frame
-	void Update () {
 	
-	}
 }

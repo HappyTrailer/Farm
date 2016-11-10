@@ -29,10 +29,7 @@ public class fild : MonoBehaviour
     {
         GetMouseValue();
     }
-    void Watering()
-    {
-        
-    }
+    
     void ChangeWatering()
     {
 
@@ -50,7 +47,7 @@ public class fild : MonoBehaviour
     }
     void Update()   // В методе апдейт происходит просчет роста растения
     {
-        Watering();
+        
         if (plant != null)  // если растение существует продолжать просчет роста
         {
             plant.GrowingProces();  // метод просчета роста

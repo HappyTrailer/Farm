@@ -3,6 +3,8 @@ using System.Collections;
 
 public class fild : MonoBehaviour
 {
+    
+
     public Sprite digedField;
     public Sprite sandField;
     /*1.По отношению к  игроку.

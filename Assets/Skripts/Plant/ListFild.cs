@@ -3,5 +3,5 @@ using System.Collections;
 
 public class ListFild : MonoBehaviour {
 
-    public GameObject[] filds;
+    public  GameObject[] filds;
 }

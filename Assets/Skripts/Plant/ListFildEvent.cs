@@ -8,16 +8,38 @@ public class ListFildEvent : MonoBehaviour {
     
 
     static List<fildEvents> list;
+   
+    ListFild listfild = new ListFild();
     // Update is called once per frame
-    void Update () {
-	
-	}
-    public static void AddFildEvent(fild f,float t)
+    void Start()
     {
-
-
-        System.DateTime dt = new System.DateTime();
-        list.Add(new fildEvents(f, dt));
+        list = new List<fildEvents>();
+      AddFildEvent(0, 300.0f, "123");
     }
-     
+    void FixedUpdate()   // В методе апдейт происходит просчет роста растения
+    {
+        СheckEvent();
+    }
+    public  void AddFildEvent(int id,float t, string ty)
+    {
+        
+       fildEvents fe = new fildEvents(id,t,ty);
+       list.Add(fe);
+        Debug.Log("Create event");
+    }
+
+    public void СheckEvent()
+    {
+        if (list.Count > 0)
+        {
+            Debug.Log("Cheked" + System.DateTime.Now.ToLongTimeString() + "            " + list[0].TimeEvent.ToLongTimeString());
+            if (System.DateTime.Now >= list[0].TimeEvent)
+            {
+                Debug.Log("Event");
+                list.Remove(list[0]);
+            }
+        }
+    }
+
+
 }

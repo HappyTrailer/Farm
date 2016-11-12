@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+//клас элемент списка для листа событий
 public class fildEvents : MonoBehaviour {
-    fild _fild;
-    System.DateTime _time;
-    public fildEvents(fild f, System.DateTime t)
+    int _fild;                //поле относительно которого выполняется событие        
+    System.DateTime _time;     // время события
+    string _type;              // тип события
+    public fildEvents(int id, float t, string s)
     {
-        _fild = f;
-        _time = t;
-    }
+        System.DateTime dt = System.DateTime.Now;
 
+        _fild = id;
+        _time = dt.AddSeconds(t);
+        _type = s;
+    }
+    public System.DateTime TimeEvent
+    {
+        get {   return _time; }
+    }
 
 }

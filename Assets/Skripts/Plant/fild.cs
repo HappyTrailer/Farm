@@ -3,7 +3,7 @@ using System.Collections;
 
 public class fild : MonoBehaviour
 {
-    
+    public int idFild;
 
     public Sprite digedField;
     public Sprite sandField;
@@ -14,11 +14,11 @@ public class fild : MonoBehaviour
     */
     byte havings;             // принадлежность
     bool dig;                 // вскопаность
-    bool watering;               //политость
+    public bool watering;               //политость
     byte weed;                 //сорняки
     bool fertilizer;           // удобрено или нет
     double fertilizer_factor; // множитель удобрения
-    byte vermin;  //вредители
+    bool vermin;  //вредители
     bool sown;    //засеяность
     bool hand;    //сбор
     bool inventory;    //инвентарь
@@ -27,12 +27,28 @@ public class fild : MonoBehaviour
 
     float wateringTime = 10.0f;
     Plant plant;        // тут поле с класом растения
+    ListFildEvent events = new ListFildEvent();
     public void OnMouseUp()
     {
         GetMouseValue();
     }
-    
-    void ChangeWatering()
+    public void ChangeVermin()
+    {
+
+        if (vermin)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = sandField;
+            vermin = !vermin;
+
+        }
+        else
+        {
+
+            this.GetComponent<SpriteRenderer>().sprite = digedField;
+            vermin = !vermin;
+        }
+    }
+    public void ChangeWatering()
     {
 
         if (watering)
@@ -78,8 +94,12 @@ public class fild : MonoBehaviour
                 break;
             //==========================================================
             case "watering":
-
-                ChangeWatering();
+                
+                if (!watering)
+                {
+                    events.AddFildEvent(idFild, 5.0f, "watering");
+                    ChangeWatering();
+                }
                 
       
                 break;
@@ -95,8 +115,7 @@ public class fild : MonoBehaviour
                 break;
             //==========================================================
             case "vermin":
-                if (vermin > 0)
-                    vermin -= 1;
+                
                 break;
             //==========================================================
             case "hand":
@@ -136,4 +155,5 @@ public class fild : MonoBehaviour
                 break;
         }
     }
+   
 }

@@ -18,5 +18,13 @@ public class fildEvents : MonoBehaviour {
     {
         get {   return _time; }
     }
+    public int FildId
+    {
+        get { return _fild; }
+    }
+    public string FildEvent
+    {
+        get { return _type; }
+    }
 
 }

@@ -2,7 +2,8 @@
 using System.Collections;
 
 //клас элемент списка для листа событий
-public class fildEvents : MonoBehaviour {
+public class fildEvents : MonoBehaviour 
+{
     int _fild;                //поле относительно которого выполняется событие        
     System.DateTime _time;     // время события
     string _type;              // тип события
@@ -26,5 +27,6 @@ public class fildEvents : MonoBehaviour {
     {
         get { return _type; }
     }
+
 
 }

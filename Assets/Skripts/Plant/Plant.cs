@@ -171,4 +171,9 @@ public class Plant : MonoBehaviour
         stage = "stage1";
         shangeSprite("stage1");
     }
+
+    public float GrowingTime
+    {
+        get { return stageOne + stageTwo + stageThree + stageFour;}
+    }
 }

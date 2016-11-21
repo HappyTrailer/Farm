@@ -26,6 +26,12 @@ public class ListFildEvent : MonoBehaviour
 
         // fildEvents fe = new fildEvents(id,t,ty);
         list.Add(new fildEvents(id, t, ty));
+        list.Sort((a, b) => a.TimeEvent.CompareTo(b.TimeEvent));
+        Debug.Log("=========================");
+        foreach (fildEvents s in list)
+        {
+            Debug.Log(s.FildEvent);
+        }
         Debug.Log("Create event");
     }
 
@@ -44,7 +50,18 @@ public class ListFildEvent : MonoBehaviour
             }
         }
     }
+    public void GenEvent(int id, float timeGrow, string type)
+    {
+       int countEv = Random.Range(0, 2);
+        float timeEvent;
+        for (int i = 0; i < countEv; i++)
+        {
+            timeEvent = Random.Range(0, timeGrow);
+            AddFildEvent(id, timeEvent, type);
+        }
+       
 
+    }
     public void DoEvent(string typeEvent, int idFild)
     {
         foreach (Transform child in filds.transform)
@@ -59,18 +76,18 @@ public class ListFildEvent : MonoBehaviour
 
                     case "watering":
                         {
-                            //listfild.filds[0].GetComponent<fild>().ChangeWatering();
-                            //listfild.GetFild(idFild);
                             child.GetComponent<fild>().ChangeWatering();
 
                             break;
                         }
                     case "vermin":
                         {
+                            child.GetComponent<fild>().ChangeVermin(true);
                             break;
                         }
                     case "weed":
                         {
+                            child.GetComponent<fild>().ChangeWeed(true);
                             break;
                         }
                 }

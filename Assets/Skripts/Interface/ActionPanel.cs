@@ -21,7 +21,8 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             case "Sell":
                 break;
-            case "Plant": 
+            case "Plant":
+                transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
                 Inv.actionPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
                 ToolCoice.currentTool = "planted";

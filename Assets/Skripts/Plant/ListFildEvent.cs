@@ -24,15 +24,15 @@ public class ListFildEvent : MonoBehaviour
     public void AddFildEvent(int id, float t, string ty)
     {
 
-        // fildEvents fe = new fildEvents(id,t,ty);
+        //fildEvents fe = new fildEvents(id,t,ty);
         list.Add(new fildEvents(id, t, ty));
         list.Sort((a, b) => a.TimeEvent.CompareTo(b.TimeEvent));
-        Debug.Log("=========================");
-        foreach (fildEvents s in list)
-        {
-            Debug.Log(s.FildEvent);
-        }
-        Debug.Log("Create event");
+        //Debug.Log("=========================");
+        //foreach (fildEvents s in list)
+        //{
+        //    Debug.Log(s.FildEvent);
+        //}
+        //Debug.Log("Create event");
     }
 
     public void СheckEvent()
@@ -68,7 +68,7 @@ public class ListFildEvent : MonoBehaviour
         {
             if (child.name == "fild_" + (idFild + 1))
             {
-                Debug.Log("1111111111111");
+               // Debug.Log("1111111111111");
 
 
                 switch (typeEvent)
@@ -76,7 +76,7 @@ public class ListFildEvent : MonoBehaviour
 
                     case "watering":
                         {
-                            child.GetComponent<fild>().ChangeWatering();
+                            child.GetComponent<fild>().ChangeWatering(true);
 
                             break;
                         }

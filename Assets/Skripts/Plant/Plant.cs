@@ -6,15 +6,20 @@ using System;
 public class Plant : MonoBehaviour
 {
     public int fruitId;
-    public double timeFactor; // множитель времени роста 
+    public double oldTimeFactor; // множитель времени роста 
+     
     public int countFruit; // количество плодов
     public int iterationFruit; // количество раз плодоношения
     public int countExpiriens; // количество опыта
+
     //*************************Стадии роста по времени*****************
     public float stageOne;
     public float stageTwo;
     public float stageThree;
     public float stageFour;
+
+    public float buffStageThree;
+    public float buffStageFour;
     //-----------------------------------------------------------------
     private float currentStage;
 
@@ -34,52 +39,126 @@ public class Plant : MonoBehaviour
     {
         this.GetComponent<SpriteRenderer>().sprite = null;
     }
+    public float AllStage
+    {
+        get {
 
-    public void GrowingProces()
+            return stageOne + stageTwo + stageThree + stageFour;
+        }
+    }
+    public void FixStageByTimeFactor(float t)
+    {
+        if (oldTimeFactor != t)
+        {
+            stageOne *= t;
+            stageTwo *= t;
+            stageThree *= t;
+            stageFour *= t;
+            oldTimeFactor = t;
+           // Debug.Log(stageOne + " " + stageTwo + " " + stageThree + " " + stageFour + " " + t );
+        }
+    }
+    public void GrowingProces(float timeFactor)
     {
         if (planted && growing)
         {
-            if (stage == "stage1" && currentStage > 0)
+            if (AllStage >= 0)
             {
-                currentStage -= Time.deltaTime;
-                if (currentStage <= 0)
+                //  Debug.Log(AllStage);
+                FixStageByTimeFactor(timeFactor);
+                switch (stage)
                 {
-                    currentStage = stageTwo;
-                    stage = "stage2";
-                    shangeSprite("stage2");
+                    case "stage1":
+                        stageOne -= Time.deltaTime;
+                        if (stageOne <= 0)
+                        {
+                            // currentStage = stageTwo;
+                            stage = "stage2";
+                            shangeSprite("stage2");
+                            stageOne = 0;
+                        }
+                        break;
+                    case "stage2":
+                        stageTwo -= Time.deltaTime;
+                        if (stageTwo <= 0)
+                        {
+                            // currentStage = stageTwo;
+                            stage = "stage3";
+                            shangeSprite("stage3");
+                            stageTwo = 0;
+                        }
+                        break;
+                    case "stage3":
+                        stageThree -= Time.deltaTime;
+
+                        if (stageThree <= 0)
+                        {
+                            stage = "stage4";
+                            shangeSprite("stage4");
+                            stageThree = 0;
+                        }
+                        break;
+                    case "stage4":
+                        stageFour -= Time.deltaTime;
+
+                        if (stageFour <= 0)
+                        {
+                            stage = "stage5";
+                            shangeSprite("stage5");
+                            growing = false;
+                            stageFour = 0;
+
+                        }
+                        break;
                 }
             }
-            else if (stage == "stage2" && currentStage > 0)
-            {
-                currentStage -= Time.deltaTime;
-                if (currentStage <= 0)
-                {
-                    currentStage = stageThree;
-                    stage = "stage3";
-                    shangeSprite("stage3");
-                }
-            }
-            else if (stage == "stage3" && currentStage > 0)
-            {
-                currentStage -= Time.deltaTime;
-                if (currentStage <= 0)
-                {
-                    currentStage = stageFour;
-                    stage = "stage4";
-                    shangeSprite("stage4");
-                }
-            }
-            else if (stage == "stage4" && currentStage > 0)
-            {
-                currentStage -= Time.deltaTime;
-                if (currentStage <= 0)
-                {
-                    currentStage = 0;
-                    stage = "stage5"; 
-                    shangeSprite("stage5");
-                    growing = false;
-                }
-            }
+            //======================================================
+            //if (stage == "stage1" && currentStage > 0)
+            //{
+            //    Debug.Log(Time.deltaTime);
+            //    currentStage -= Time.deltaTime;
+
+            //    if (currentStage <= 0)
+            //    {
+            //        currentStage = stageTwo;
+            //        stage = "stage2";
+            //        shangeSprite("stage2");
+            //    }
+            //}
+            //else if (stage == "stage2" && currentStage > 0)
+            //{
+            //    currentStage -= Time.deltaTime;
+
+            //    if (currentStage <= 0)
+            //    {
+            //        currentStage = stageThree;
+            //        stage = "stage3";
+            //        shangeSprite("stage3");
+            //    }
+            //}
+            //else if (stage == "stage3" && currentStage > 0)
+            //{
+            //    currentStage -= Time.deltaTime;
+
+            //    if (currentStage <= 0)
+            //    {
+            //        currentStage = stageFour;
+            //        stage = "stage4";
+            //        shangeSprite("stage4");
+            //    }
+            //}
+            //else if (stage == "stage4" && currentStage > 0)
+            //{
+            //    currentStage -= Time.deltaTime;
+            //    if (currentStage <= 0)
+            //    {
+            //        currentStage = 0;
+            //        stage = "stage5"; 
+            //        shangeSprite("stage5");
+            //        growing = false;
+            //    }
+            //}
+            //======================================================
         }
     }
 
@@ -149,7 +228,8 @@ public class Plant : MonoBehaviour
                 iterationFruit--;
                 stage = "stage3";
                 shangeSprite("stage3");
-                currentStage = stageThree;
+                stageThree = buffStageThree;
+                stageFour = buffStageFour;
                 growing = true;
             }
             else
@@ -163,11 +243,15 @@ public class Plant : MonoBehaviour
         }
     }
 
-    public void StartGrowing()
+    public void StartGrowing(float timeFactor)
     {
+         buffStageThree = stageThree;
+        buffStageFour = stageFour;
+    oldTimeFactor = timeFactor;
         planted = true;
         growing = true;
-        currentStage = stageOne;
+        FixStageByTimeFactor(timeFactor);
+       // allStage = stageOne + stageTwo + stageThree + stageFour;
         stage = "stage1";
         shangeSprite("stage1");
     }

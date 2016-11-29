@@ -30,8 +30,14 @@ public class fild : MonoBehaviour
 
 
     float wateringTime = 10.0f;
+    float timeFactor = 1.0f;
     Plant plant;        // тут поле с класом растения
     ListFildEvent events = new ListFildEvent();
+    void OnMouseOver()//тут метод появления времени роста при попадании мышки с значением оставшегося времени
+    {
+        if(plant)
+        Debug.Log(plant.AllStage);
+    }
     public void OnMouseUp()
     {
         GetMouseValue();
@@ -40,27 +46,38 @@ public class fild : MonoBehaviour
     {
 
         weedSprite.SetActive(val);
+        if (!val)
+            timeFactor -= 0.2f;
+        else
+            timeFactor += 0.2f;
         weed = val;
     }
     public void ChangeVermin(bool val)
     {
 
         verminSprite.SetActive(val);
+        if (!val)
+            timeFactor -= 0.2f;
+        else
+            timeFactor += 0.2f;
         vermin = val;
     }
-    public void ChangeWatering()
+    public void ChangeWatering(bool val)
     {
 
-        if (watering)
+        if (val)
         {
             this.GetComponent<SpriteRenderer>().sprite = sandField;
-            watering = !watering;
-            
+            watering = !val;
+            Debug.Log(watering);
+            timeFactor += 0.2f;
         }
         else {
             
             this.GetComponent<SpriteRenderer>().sprite = digedField;
-            watering = !watering;
+            watering = !val;
+            Debug.Log(watering);
+            timeFactor -= 0.2f;
         }
     }
     void Update()   // В методе апдейт происходит просчет роста растения
@@ -68,7 +85,8 @@ public class fild : MonoBehaviour
         
         if (plant != null)  // если растение существует продолжать просчет роста
         {
-            plant.GrowingProces();  // метод просчета роста
+            plant.GrowingProces(timeFactor);  // метод просчета роста
+            //Debug.Log(timeFactor +"            "+ Time.deltaTime);
         }
     }
 
@@ -91,7 +109,8 @@ public class fild : MonoBehaviour
                             ChangeWeed(false);
                             ChangeVermin(false);
                             watering = true;
-                            ChangeWatering();
+                            ChangeWatering(true);
+                            timeFactor = 1.0f;
                         }
                     }
                 }
@@ -101,15 +120,17 @@ public class fild : MonoBehaviour
                 
                 if (!watering)
                 {
-                    events.AddFildEvent(idFild, 5.0f, "watering");
-                    ChangeWatering();
+                    events.AddFildEvent(idFild, 300.0f, "watering");
+                    ChangeWatering(false);
                 }
                 
       
                 break;
             //==========================================================
             case "weed":
+                if(weed)
                 ChangeWeed(!weed);
+                
                 break;
             //==========================================================
             case "fertilizer":
@@ -118,6 +139,7 @@ public class fild : MonoBehaviour
                 break;
             //==========================================================
             case "vermin":
+                if(vermin)
                 ChangeVermin(!vermin);
                 break;
             //==========================================================
@@ -153,12 +175,14 @@ public class fild : MonoBehaviour
 
                     this.GetComponentInChildren<Plant>().Init(Inv.currentSead);
                     plant = this.GetComponentInChildren<Plant>();
-                    plant.StartGrowing();
+                    plant.StartGrowing(timeFactor);
                     events.GenEvent(idFild, plant.GrowingTime, "vermin");
                     events.GenEvent(idFild, plant.GrowingTime, "weed");
                 }
                 break;
         }
     }
+
+
    
 }

@@ -41,12 +41,14 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             if (Inv.inventoryPanel.activeSelf == false)
             {
                 Inv.inventoryPanel.SetActive(true);
-                Inv.FillInventory();
+                Inv.filterPanel.SetActive(true);
+                Inv.FillInventory("sead");
             }
             else
             {
                 currentTool = "arrow";
                 Inv.actionPanel.SetActive(false);
+                Inv.filterPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
             }
         }

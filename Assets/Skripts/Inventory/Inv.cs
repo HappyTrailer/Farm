@@ -13,8 +13,11 @@ public class Inv : MonoBehaviour {
     public GameObject inv; 
     public static GameObject actionPanel;
     public GameObject act;
-    public static Sead currentSead; 
+    public static GameObject filterPanel;
+    public GameObject filter;
+    public static Sead currentSead;
     public static int currSelect = -1;
+    public static int counter = 0;
     public static List<Item> items;
 
     void Start()
@@ -22,6 +25,7 @@ public class Inv : MonoBehaviour {
         items = Load();
         inventoryPanel = inv;
         actionPanel = act;
+        filterPanel = filter;
     }
 
     public static void DropItem(int id)
@@ -81,7 +85,7 @@ public class Inv : MonoBehaviour {
         return buff;
     }
 
-    public static void FillInventory()
+    public static void FillInventory(string type)
     {
         currSelect = -1;
         XmlDocument buff;
@@ -120,27 +124,36 @@ public class Inv : MonoBehaviour {
                         }
                     }
                     break;
+                case "tool":
+                    break;
             }
         }
+        Inv.counter = 0;
+        int k = 0;
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
-            if (items.Count > i)
+            inventoryPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
+            inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
+            inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "";
+            if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
+                Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
+            if (items.Count > k)
             {
-                inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].SpritePath);
-                inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[i].ItemCount.ToString();
-                if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
-                    Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
-                inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Sead>().Init(items[i] as ItemInInventory);
+                if (items[k].ItemType == type)
+                {
+                    inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath);
+                    inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[k].ItemCount.ToString();
+                    if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
+                        Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
+                    inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Sead>().Init(items[k] as ItemInInventory);
+                }
+                else
+                {
+                    Inv.counter++;
+                    i--;
+                }
             }
-            else
-            {
-                inventoryPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
-                inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
-                inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "";
-                if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
-                    Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
-            }
-
+            k++;
         }
     }
 

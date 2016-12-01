@@ -25,6 +25,7 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
                 Inv.actionPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
+                Inv.filterPanel.SetActive(false);
                 ToolCoice.currentTool = "planted";
                 ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/cartoon-seeds");
                 break;

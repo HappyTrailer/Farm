@@ -164,13 +164,13 @@ public class fild : MonoBehaviour
                 {
                     dig = false;
                    // Debug.Log("planted ");
-                    Inv.items[Inv.currSelect].ItemCount -= 1;
+                    Inv.items[Inv.currSelect + Inv.counter].ItemCount -= 1;
 
-                    if (Inv.items[Inv.currSelect].ItemCount <= 0)
+                    if (Inv.items[Inv.currSelect + Inv.counter].ItemCount <= 0)
                     {
                         ToolCoice.currentTool = "arrow";
                         ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow_cartoon_blue_left 1");
-                        Inv.DropItem(Inv.currSelect);
+                        Inv.DropItem(Inv.currSelect + Inv.counter);
                     }
 
                     this.GetComponentInChildren<Plant>().Init(Inv.currentSead);

@@ -10,6 +10,8 @@ public class fild : MonoBehaviour
 
     public GameObject verminSprite;
     public GameObject weedSprite;
+    public GameObject Sounds;
+    
 
     /*1.По отношению к  игроку.
         1.1. Грядка приобретенная игроком
@@ -33,6 +35,8 @@ public class fild : MonoBehaviour
     float timeFactor = 1.0f;
     Plant plant;        // тут поле с класом растения
     ListFildEvent events = new ListFildEvent();
+
+
     void OnMouseOver()//тут метод появления времени роста при попадании мышки с значением оставшегося времени
     {
         if(plant)
@@ -80,6 +84,10 @@ public class fild : MonoBehaviour
             timeFactor -= 0.2f;
         }
     }
+    void Start()
+    {
+
+    }
     void Update()   // В методе апдейт происходит просчет роста растения
     {
         
@@ -102,6 +110,8 @@ public class fild : MonoBehaviour
                     {
                         if (plant.stage == "stage6")
                         {
+                            Sounds.GetComponent<Sounds>().PlaySoudDiging();
+
                             plant.EndGrow();
                             plant = null;
                             dig = true;
@@ -120,16 +130,21 @@ public class fild : MonoBehaviour
                 
                 if (!watering)
                 {
+                    Sounds.GetComponent<Sounds>().PlaySoudWatering();
                     events.AddFildEvent(idFild, 300.0f, "watering");
                     ChangeWatering(false);
+                    
                 }
                 
       
                 break;
             //==========================================================
             case "weed":
-                if(weed)
-                ChangeWeed(!weed);
+                if (weed)
+                {
+                    Sounds.GetComponent<Sounds>().PlaySoudSprey();
+                    ChangeWeed(!weed);
+                }
                 
                 break;
             //==========================================================
@@ -139,13 +154,17 @@ public class fild : MonoBehaviour
                 break;
             //==========================================================
             case "vermin":
-                if(vermin)
-                ChangeVermin(!vermin);
+                if (vermin)
+                {
+                    Sounds.GetComponent<Sounds>().PlaySoudSprey();
+                    ChangeVermin(!vermin);
+                }
                 break;
             //==========================================================
             case "hand":
                 if (plant != null)
                 {
+                    Sounds.GetComponent<Sounds>().PlaySoudGet();
                     plant.DropFruit();
                 }
                 break;

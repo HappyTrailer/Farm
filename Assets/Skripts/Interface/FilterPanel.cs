@@ -7,6 +7,7 @@ public class FilterPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
+        GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
         transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
     }
 

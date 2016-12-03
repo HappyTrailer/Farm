@@ -72,6 +72,7 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
         hovererd = true;
         Color a = GetComponent<Image>().color;
         if (Inv.currSelect != transform.GetSiblingIndex())

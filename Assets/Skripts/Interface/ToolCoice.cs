@@ -56,6 +56,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+        GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
         hover = true;
         seno.gameObject.SetActive(true);
         img.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);

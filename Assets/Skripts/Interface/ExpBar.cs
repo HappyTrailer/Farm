@@ -47,6 +47,7 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
         transform.FindChild("level").transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
         scr.transform.parent.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
         notify.gameObject.SetActive(true);

@@ -25,6 +25,7 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
         if (!hover)
         {
             seno.gameObject.SetActive(true);

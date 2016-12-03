@@ -7,6 +7,7 @@ public class Sounds : MonoBehaviour
     public AudioClip clipDiging;
     public AudioClip clipSprey;
     public AudioClip clipGet;
+    public AudioClip clipTool;
     public GameObject camera;
 
     public void PlaySoudWatering()
@@ -24,6 +25,10 @@ public class Sounds : MonoBehaviour
     public void PlaySoudGet()
     {
         AudioSource.PlayClipAtPoint(clipGet, camera.transform.position);
+    }
+    public void PlaySoudTool()
+    {
+        AudioSource.PlayClipAtPoint(clipTool, camera.transform.position);
     }
 
 }

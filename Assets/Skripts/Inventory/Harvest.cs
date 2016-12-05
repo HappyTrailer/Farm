@@ -44,14 +44,14 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
         set { id = value; }
     }
 
-    public void Sale()
+    public void Init(ItemInInventory sead)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public void Drop()
-    {
-        throw new System.NotImplementedException();
+        this.Id = sead.Id;
+        this.ItemPrice = sead.ItemPrice;
+        this.ItemType = sead.ItemType;
+        this.SpritePath = sead.SpritePath;
+        this.ItemName = sead.ItemName;
+        this.ItemCount = sead.ItemCount;
     }
 
     void Update()
@@ -67,7 +67,9 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
     public void OnPointerClick(PointerEventData eventData)
     {
         Inv.actionPanel.SetActive(true);
+        Inv.actionPanel.transform.GetChild(1).gameObject.SetActive(false);
         Inv.currSelect = transform.GetSiblingIndex();
+        Inv.currentHarv = this;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

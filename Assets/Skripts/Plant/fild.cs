@@ -188,7 +188,7 @@ public class fild : MonoBehaviour
                     if (Inv.items[Inv.currSelect + Inv.counter].ItemCount <= 0)
                     {
                         ToolCoice.currentTool = "arrow";
-                        ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow_cartoon_blue_left 1");
+                        ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
                         Inv.DropItem(Inv.currSelect + Inv.counter);
                     }
 

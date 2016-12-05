@@ -8,7 +8,6 @@ using System.Collections;
 public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 	public Sprite texture;
-    public Image cursor; 
     public static Image globalCursor;
 	public Image CountryImg;
     private Image img;
@@ -18,7 +17,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     void Start()
     {
-        globalCursor = cursor;
+        globalCursor = GameObject.Find("Cursor").GetComponent<Image>();
         seno = CountryImg.transform.GetChild(0).GetComponent<Image>();
         img = CountryImg.transform.GetChild(1).GetComponent<Image>();
     }
@@ -34,10 +33,10 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
 	public void OnPointerClick(PointerEventData eventData)
     {
-        cursor.sprite = texture;
-        currentTool = this.name;
         if (this.name == "inventory")
         {
+            currentTool = "arrow";
+            globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
             if (Inv.inventoryPanel.activeSelf == false)
             {
                 Inv.inventoryPanel.SetActive(true);
@@ -46,11 +45,15 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             }
             else
             {
-                currentTool = "arrow";
                 Inv.actionPanel.SetActive(false);
                 Inv.filterPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
             }
+        }
+        else
+        {
+            globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
+            currentTool = this.name;
         }
 	}
 

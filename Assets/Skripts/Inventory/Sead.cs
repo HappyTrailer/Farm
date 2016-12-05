@@ -67,6 +67,7 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
     public void OnPointerClick(PointerEventData eventData)
     {
         Inv.actionPanel.SetActive(true);
+        Inv.actionPanel.transform.GetChild(1).gameObject.SetActive(true);
         Inv.currSelect = transform.GetSiblingIndex();
         Inv.currentSead = this;
     }

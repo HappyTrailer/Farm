@@ -18,7 +18,6 @@ public class Inv : MonoBehaviour {
     public static Sead currentSead;
     public static Harvest currentHarv;
     public static int currSelect = -1;
-    public static int counter = 0;
     public static List<Item> items;
 
     void Start()
@@ -41,7 +40,7 @@ public class Inv : MonoBehaviour {
         foreach (Item item in items)
         {
             curr++;
-            if (item.ItemType == "harvest" && item.Id == fruitId)
+            if (item.ItemType == "harvest" && item.Id == fruitId && item.ItemCount < 10)
             {
                 isExist = true;
                 break;
@@ -49,12 +48,52 @@ public class Inv : MonoBehaviour {
         }
         if (isExist)
         {
-            items[curr].ItemCount += countFruit;
-            Debug.Log(items[curr].ItemCount);
+            if (items[curr].ItemCount + countFruit > 10)
+            {
+                int mod = 10 - items[curr].ItemCount;
+                items[curr].ItemCount += mod;
+                countFruit = countFruit - mod;
+                do
+                {
+                    if (countFruit >= 10)
+                    {
+                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = 10 });
+                        countFruit = countFruit - 10;
+                    }
+                    else
+                    {
+                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = countFruit });
+                        countFruit = 0;
+                    }
+                } while (countFruit != 0);
+            }
+            else
+            {
+                items[curr].ItemCount += countFruit;
+            }
         }
         else
         {
-            items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = countFruit });
+            if (countFruit > 10)
+            {
+                do
+                {
+                    if (countFruit >= 10)
+                    {
+                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = 10 });
+                        countFruit = countFruit - 10;
+                    }
+                    else
+                    {
+                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = countFruit });
+                        countFruit = 0;
+                    }
+                } while (countFruit != 0);
+            }
+            else
+            {
+                items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = countFruit });
+            }
         }
     }
 
@@ -78,11 +117,11 @@ public class Inv : MonoBehaviour {
             buff = (List<Item>)formater.Deserialize(fs);
             fs.Close();
         }
-        if (buff.Count == 0)
+        /*if (buff.Count == 0)
         {
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 5 });
             buff.Add(new ItemInInventory() { Id = 2, ItemType = "sead", ItemCount = 5 });
-        }
+        }*/
         return buff;
     }
 
@@ -129,7 +168,6 @@ public class Inv : MonoBehaviour {
                     break;
             }
         }
-        Inv.counter = 0;
         int k = 0;
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
@@ -148,6 +186,7 @@ public class Inv : MonoBehaviour {
                         inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[k].ItemCount.ToString();
                         if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
                             Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
+                        items[k].ItemId = k;
                         inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Sead>().Init(items[k] as ItemInInventory);
                     }
                     else if(items[k].ItemType == "harvest")
@@ -156,12 +195,12 @@ public class Inv : MonoBehaviour {
                         inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[k].ItemCount.ToString();
                         if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Harvest>() != null)
                             Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Harvest>());
+                        items[k].ItemId = k;
                         inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Harvest>().Init(items[k] as ItemInInventory);
                     }
                 }
                 else
                 {
-                    Inv.counter++;
                     i--;
                 }
             }

@@ -9,5 +9,6 @@ public interface Item
     string ItemType { get; set; }
     string SpritePath { get; set; }
     int ItemCount { get; set; }
+    int ItemId { get; set; }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public int item_id;
     public int id;
     public int itemPrice;
     public string itemName;
@@ -38,6 +39,12 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         set { spritePath = value; }
     }
 
+    public int ItemId
+    {
+        get { return item_id; }
+        set { item_id = value; }
+    }
+
     public int Id
     {
         get { return id; }
@@ -52,6 +59,7 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         this.SpritePath = sead.SpritePath;
         this.ItemName = sead.ItemName;
         this.ItemCount = sead.ItemCount;
+        this.ItemId = sead.ItemId;
     }
 
     void Update()

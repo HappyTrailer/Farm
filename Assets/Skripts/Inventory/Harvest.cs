@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public int item_id;
     public int id;
     public int itemPrice;
     public string itemName;
@@ -18,6 +19,12 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
     {
         get { return itemPrice; }
         set { itemPrice = value; }
+    }
+
+    public int ItemId
+    {
+        get { return item_id; }
+        set { item_id = value; }
     }
 
     public string ItemName
@@ -52,6 +59,7 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
         this.SpritePath = sead.SpritePath;
         this.ItemName = sead.ItemName;
         this.ItemCount = sead.ItemCount;
+        this.ItemId = sead.ItemId;
     }
 
     void Update()

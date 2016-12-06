@@ -6,12 +6,19 @@ using System.Text;
 [Serializable]
 public class ItemInInventory: Item
 {
+    public int item_id;
     public int id;
     public int itemPrice;
     public string itemName;
     public string itemType;
     public string spritePath;
     public int itemCount;
+
+    public int ItemId
+    {
+        get { return item_id; }
+        set { item_id = value; }
+    }
 
     public int ItemPrice
     {

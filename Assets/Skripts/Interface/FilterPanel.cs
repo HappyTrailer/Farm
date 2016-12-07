@@ -22,13 +22,16 @@ public class FilterPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         switch (this.name)
         {
             case "Tool":
-                Inv.FillInventory("tool");
+                Inv.currentType = "tool";
+                Inv.FillInventory("first");
                 break;
             case "Sead":
-                Inv.FillInventory("sead");
+                Inv.currentType = "sead";
+                Inv.FillInventory("first");
                 break;
             case "Fruit":
-                Inv.FillInventory("harvest");
+                Inv.currentType = "harvest";
+                Inv.FillInventory("first");
                 break;
         }
     }

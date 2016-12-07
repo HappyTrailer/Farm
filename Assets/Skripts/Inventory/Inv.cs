@@ -16,12 +16,14 @@ public class Inv : MonoBehaviour {
     public static GameObject filterPanel;
     public GameObject filter;
     public static Sead currentSead;
+    public static string currentType;
     public static Harvest currentHarv;
     public static int currSelect = -1;
     public static List<Item> items;
 
     void Start()
     {
+        currentType = "sead";
         items = Load();
         inventoryPanel = inv;
         actionPanel = act;
@@ -125,7 +127,7 @@ public class Inv : MonoBehaviour {
         return buff;
     }
 
-    public static void FillInventory(string type)
+    public static void FillInventory(string page)
     {
         currSelect = -1;
         XmlDocument buff;
@@ -178,7 +180,7 @@ public class Inv : MonoBehaviour {
                 Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
             if (items.Count > k)
             {
-                if (items[k].ItemType == type)
+                if (items[k].ItemType == currentType)
                 {
                     if (items[k].ItemType == "sead")
                     {

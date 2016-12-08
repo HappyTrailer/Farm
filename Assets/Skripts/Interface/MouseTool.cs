@@ -29,6 +29,9 @@ public class MouseTool : MonoBehaviour {
                     case "hand":
                         ToolCoice.currentTool = "arrow";
                         break;
+                    case "planted":
+                        ToolCoice.currentTool = "arrow";
+                        break;
                 }
                 ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolCoice.currentTool);
             }
@@ -52,6 +55,9 @@ public class MouseTool : MonoBehaviour {
                         ToolCoice.currentTool = "dig";
                         break;
                     case "dig":
+                        ToolCoice.currentTool = "arrow";
+                        break;
+                    case "planted":
                         ToolCoice.currentTool = "arrow";
                         break;
                 }

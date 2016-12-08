@@ -22,11 +22,11 @@ public class Pagination : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         switch (this.name)
         {
             case "Left":
-                if()
+                if(Inv.countNext > 0)
                     Inv.FillInventory("prev");
                 break;
             case "Right":
-                if()
+                if (Inv.NextExists())
                     Inv.FillInventory("next");
                 break;
         }

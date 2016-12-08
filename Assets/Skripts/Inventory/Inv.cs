@@ -20,6 +20,9 @@ public class Inv : MonoBehaviour {
     public static Harvest currentHarv;
     public static int currSelect = -1;
     public static List<Item> items;
+    public static int k = 0;
+    public static int countNext = 0;
+    public static List<int> prevIndex = new List<int>();
 
     void Start()
     {
@@ -121,7 +124,7 @@ public class Inv : MonoBehaviour {
         }
         /*if (buff.Count == 0)
         {
-            buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 5 });
+            buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
             buff.Add(new ItemInInventory() { Id = 2, ItemType = "sead", ItemCount = 5 });
         }*/
         return buff;
@@ -170,34 +173,42 @@ public class Inv : MonoBehaviour {
                     break;
             }
         }
-        int k = 0;
+        if (page == "first")
+        {
+            k = 0;
+            countNext = 0;
+        }
+        else if (page == "next")
+        {
+            countNext++;
+            prevIndex.Add(inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Harvest>().ItemId);
+        }
+        else if (page == "prev")
+        {
+            k = prevIndex[countNext - 1];
+            prevIndex.RemoveAt(countNext - 1);
+            countNext--;
+        }
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
             inventoryPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
             inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
             inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "";
-            if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
-                Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Harvest>());
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
             if (items.Count > k)
             {
                 if (items[k].ItemType == currentType)
                 {
+                    inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath);
+                    inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[k].ItemCount.ToString();
+                    items[k].ItemId = k;
                     if (items[k].ItemType == "sead")
                     {
-                        inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath);
-                        inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[k].ItemCount.ToString();
-                        if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>() != null)
-                            Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
-                        items[k].ItemId = k;
                         inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Sead>().Init(items[k] as ItemInInventory);
                     }
                     else if(items[k].ItemType == "harvest")
                     {
-                        inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath);
-                        inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[k].ItemCount.ToString();
-                        if (inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Harvest>() != null)
-                            Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Harvest>());
-                        items[k].ItemId = k;
                         inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Harvest>().Init(items[k] as ItemInInventory);
                     }
                 }
@@ -208,6 +219,16 @@ public class Inv : MonoBehaviour {
             }
             k++;
         }
+    }
+
+    public static bool NextExists()
+    {
+        for (int i = k; i < items.Count; i++)
+        {
+            if(items[i].ItemType == currentType)
+                return true;
+        }
+        return false;
     }
 
     void OnApplicationQuit()

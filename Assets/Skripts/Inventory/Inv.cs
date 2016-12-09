@@ -189,6 +189,10 @@ public class Inv : MonoBehaviour {
             prevIndex.RemoveAt(countNext - 1);
             countNext--;
         }
+        else if (page == "current")
+        {
+            k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Harvest>().ItemId;
+        }
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
             inventoryPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);

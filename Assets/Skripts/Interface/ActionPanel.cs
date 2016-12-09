@@ -21,6 +21,13 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         switch(this.name)
         {
             case "Sell":
+                Inv.items[Inv.currentHarv.ItemId].ItemCount -= 1;
+                if (Inv.items[Inv.currentHarv.ItemId].ItemCount <= 0)
+                {
+                    Inv.DropItem(Inv.currentHarv.ItemId);
+                    Inv.actionPanel.SetActive(false);
+                }
+                Inv.FillInventory("current");
                 break;
             case "Plant":
                 transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);

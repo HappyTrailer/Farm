@@ -19,6 +19,7 @@ public class Pagination : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
+        Inv.actionPanel.SetActive(false);
         switch (this.name)
         {
             case "Left":

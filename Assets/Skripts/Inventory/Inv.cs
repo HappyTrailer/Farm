@@ -33,6 +33,14 @@ public class Inv : MonoBehaviour {
         filterPanel = filter;
     }
 
+    public static void Select(int id)
+    {
+        if(currentType == "sead")
+            inventoryPanel.transform.GetChild(id).gameObject.GetComponent<Sead>().Select();
+        else if (currentType == "harvest")
+            inventoryPanel.transform.GetChild(id).gameObject.GetComponent<Harvest>().Select();
+    }
+
     public static void DropItem(int id)
     {
         Inv.items.RemoveAt(id);
@@ -191,7 +199,10 @@ public class Inv : MonoBehaviour {
         }
         else if (page == "current")
         {
-            k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Harvest>().ItemId;
+            if (Inv.currentType == "harvest")
+                k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Harvest>().ItemId;
+            else if (Inv.currentType == "sead")
+                k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Sead>().ItemId;
         }
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {

@@ -72,6 +72,14 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         }
     }
 
+    public void Select()
+    {
+        Color a = GetComponent<Image>().color;
+        GetComponent<Image>().color = new Color(a.r, a.g, a.b, 1);
+        Inv.currSelect = transform.GetSiblingIndex();
+        Inv.currentSead = this;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         Inv.actionPanel.SetActive(true);

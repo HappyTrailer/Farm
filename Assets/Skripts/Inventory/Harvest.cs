@@ -13,7 +13,7 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
     public string spritePath;
     public int itemCount;
 
-    private bool hovererd = false;
+    private bool hovered = false;
 
     public int ItemPrice
     {
@@ -64,12 +64,20 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
 
     void Update()
     {
-        if (!hovererd)
+        if (!hovered)
         {
             Color a = GetComponent<Image>().color;
             if (Inv.currSelect != transform.GetSiblingIndex())
                 GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
         }
+    }
+
+    public void Select()
+    {
+        Color a = GetComponent<Image>().color;
+        GetComponent<Image>().color = new Color(a.r, a.g, a.b, 1); 
+        Inv.currSelect = transform.GetSiblingIndex();
+        Inv.currentHarv = this;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -83,7 +91,7 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
     public void OnPointerEnter(PointerEventData eventData)
     {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-        hovererd = true;
+        hovered = true;
         Color a = GetComponent<Image>().color;
         if (Inv.currSelect != transform.GetSiblingIndex())
             GetComponent<Image>().color = new Color(a.r, a.g, a.b, 1);
@@ -91,7 +99,7 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        hovererd = false;
+        hovered = false;
         Color a = GetComponent<Image>().color;
         if (Inv.currSelect != transform.GetSiblingIndex())
             GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);

@@ -5,12 +5,12 @@ public class fild : MonoBehaviour
 {
     public int idFild;
 
-    public Sprite digedField;
-    public Sprite sandField;
+    Sprite digedField;
+    Sprite sandField;
 
-    public GameObject verminSprite;
-    public GameObject weedSprite;
-    public GameObject Sounds;
+    GameObject verminSprite;
+    GameObject weedSprite;
+    GameObject Sounds;
     
 
     /*1.По отношению к  игроку.
@@ -86,6 +86,10 @@ public class fild : MonoBehaviour
     }
     void Start()
     {
+        verminSprite = transform.FindChild("Vermin").gameObject;
+        weedSprite = transform.FindChild("Weed").gameObject;
+        digedField = Resources.Load<Sprite>("Sprite/Bad/digedField");
+        sandField = Resources.Load<Sprite>("Sprite/Bad/sandField");
 
     }
     void Update()   // В методе апдейт происходит просчет роста растения
@@ -110,7 +114,7 @@ public class fild : MonoBehaviour
                     {
                         if (plant.stage == "stage6")
                         {
-                            Sounds.GetComponent<Sounds>().PlaySoudDiging();
+                            GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudDiging();
 
                             plant.EndGrow();
                             plant = null;
@@ -130,7 +134,7 @@ public class fild : MonoBehaviour
                 
                 if (!watering)
                 {
-                    Sounds.GetComponent<Sounds>().PlaySoudWatering();
+                    GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudWatering();
                     events.AddFildEvent(idFild, 300.0f, "watering");
                     ChangeWatering(false);
                     
@@ -142,7 +146,7 @@ public class fild : MonoBehaviour
             case "weed":
                 if (weed)
                 {
-                    Sounds.GetComponent<Sounds>().PlaySoudSprey();
+                    GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudSprey();
                     ChangeWeed(!weed);
                 }
                 
@@ -156,7 +160,7 @@ public class fild : MonoBehaviour
             case "vermin":
                 if (vermin)
                 {
-                    Sounds.GetComponent<Sounds>().PlaySoudSprey();
+                    GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudSprey();
                     ChangeVermin(!vermin);
                 }
                 break;
@@ -164,7 +168,7 @@ public class fild : MonoBehaviour
             case "hand":
                 if (plant != null)
                 {
-                    Sounds.GetComponent<Sounds>().PlaySoudGet();
+                    GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudGet();
                     plant.DropFruit();
                 }
                 break;

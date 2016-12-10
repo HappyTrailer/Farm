@@ -130,11 +130,11 @@ public class Inv : MonoBehaviour {
             buff = (List<Item>)formater.Deserialize(fs);
             fs.Close();
         }
-        /*if (buff.Count == 0)
+        if (buff.Count == 0)
         {
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
             buff.Add(new ItemInInventory() { Id = 2, ItemType = "sead", ItemCount = 5 });
-        }*/
+        }
         return buff;
     }
 

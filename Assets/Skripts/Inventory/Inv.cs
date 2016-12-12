@@ -48,44 +48,26 @@ public class Inv : MonoBehaviour {
 
     public static void GetHarvestToInventory(int countFruit, int fruitId)
     {
-        bool isExist = false;
         int curr = -1;
         foreach (Item item in items)
         {
             curr++;
             if (item.ItemType == "harvest" && item.Id == fruitId && item.ItemCount < 10)
             {
-                isExist = true;
-                break;
-            }
-        }
-        if (isExist)
-        {
-            if (items[curr].ItemCount + countFruit > 10)
-            {
-                int mod = 10 - items[curr].ItemCount;
-                items[curr].ItemCount += mod;
-                countFruit = countFruit - mod;
-                do
+                if (items[curr].ItemCount + countFruit > 10)
                 {
-                    if (countFruit >= 10)
-                    {
-                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = 10 });
-                        countFruit = countFruit - 10;
-                    }
-                    else
-                    {
-                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = countFruit });
-                        countFruit = 0;
-                    }
-                } while (countFruit != 0);
-            }
-            else
-            {
-                items[curr].ItemCount += countFruit;
+                    int mod = 10 - items[curr].ItemCount;
+                    items[curr].ItemCount += mod;
+                    countFruit = countFruit - mod;
+                }
+                else
+                {
+                    items[curr].ItemCount += countFruit;
+                    countFruit = 0;
+                }
             }
         }
-        else
+        if (countFruit != 0)
         {
             if (countFruit > 10)
             {

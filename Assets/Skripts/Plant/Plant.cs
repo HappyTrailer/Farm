@@ -7,8 +7,9 @@ public class Plant : MonoBehaviour
 {
     public int fruitId;
     public double oldTimeFactor; // множитель времени роста 
-     
-    public int countFruit; // количество плодов
+
+    public int mincountFruit; // количество плодов
+    public int maxcountFruit; // количество плодов
     public int iterationFruit; // количество раз плодоношения
     public int countExpiriens; // количество опыта
 
@@ -164,31 +165,28 @@ public class Plant : MonoBehaviour
 
     public void Init(Sead sead)
     {
-        XmlDocument seadXml = new XmlDocument();
-        TextAsset bindata  = Resources.Load("XML/Seads") as TextAsset; 
-        seadXml.LoadXml(bindata.text);
-        XmlElement root = seadXml.DocumentElement;
-        foreach(XmlElement item in root)
+        foreach(PlantItem item in PlantList.seads)
         {
-            if (item.ChildNodes[0].InnerText == sead.Id.ToString())
+            if (item.id == sead.Id)
             {
-                countFruit = Convert.ToInt32(item.ChildNodes[4].InnerText);
-                iterationFruit = Convert.ToInt32(item.ChildNodes[5].InnerText);
-                countExpiriens = Convert.ToInt32(item.ChildNodes[6].InnerText);
+                maxcountFruit = item.maxCountFruit;
+                mincountFruit = item.minCountFruit;
+                iterationFruit = item.iterationFruit - 1;
+                countExpiriens = item.countExpiriens;
 
-                stageOne = Convert.ToSingle(item.ChildNodes[7].InnerText);
-                stageTwo = Convert.ToSingle(item.ChildNodes[8].InnerText);
-                stageThree = Convert.ToSingle(item.ChildNodes[9].InnerText);
-                stageFour = Convert.ToSingle(item.ChildNodes[10].InnerText);
+                stageOne = item.time;
+                stageTwo = item.time;
+                stageThree = item.time;
+                stageFour = item.time;
 
-                pl1 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[11].InnerText);
-                pl2 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[12].InnerText);
-                pl3 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[13].InnerText);
-                pl4 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[14].InnerText);
-                pl5 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[15].InnerText);
-                pl6 = Resources.Load<Sprite>("Sprite/Plant/" + item.ChildNodes[16].InnerText);
+                pl1 = Resources.Load<Sprite>("Sprite/Plant/" + item.name + "/pl1");
+                pl2 = Resources.Load<Sprite>("Sprite/Plant/" + item.name + "/pl2");
+                pl3 = Resources.Load<Sprite>("Sprite/Plant/" + item.name + "/pl3");
+                pl4 = Resources.Load<Sprite>("Sprite/Plant/" + item.name + "/pl4");
+                pl5 = Resources.Load<Sprite>("Sprite/Plant/" + item.name + "/pl5");
+                pl6 = Resources.Load<Sprite>("Sprite/Plant/" + item.name + "/pl6");
 
-                fruitId = Convert.ToInt32(item.ChildNodes[17].InnerText);
+                fruitId = item.id;
             }
         }
     }
@@ -222,7 +220,9 @@ public class Plant : MonoBehaviour
     {
         if (stage == "stage5")
         {
-            Inv.GetHarvestToInventory(countFruit, fruitId);
+            int countEv = UnityEngine.Random.Range(mincountFruit, maxcountFruit);
+            Inv.GetHarvestToInventory(countEv, fruitId);
+            ExpBar.current += countExpiriens;
             if (iterationFruit >= 1)
             {
                 iterationFruit--;
@@ -245,13 +245,13 @@ public class Plant : MonoBehaviour
 
     public void StartGrowing(float timeFactor)
     {
-         buffStageThree = stageThree;
+        buffStageThree = stageThree;
         buffStageFour = stageFour;
-    oldTimeFactor = timeFactor;
+        oldTimeFactor = timeFactor;
         planted = true;
         growing = true;
         FixStageByTimeFactor(timeFactor);
-       // allStage = stageOne + stageTwo + stageThree + stageFour;
+        // allStage = stageOne + stageTwo + stageThree + stageFour;
         stage = "stage1";
         shangeSprite("stage1");
     }

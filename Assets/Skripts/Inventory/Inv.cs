@@ -115,7 +115,6 @@ public class Inv : MonoBehaviour {
         if (buff.Count == 0)
         {
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
-            buff.Add(new ItemInInventory() { Id = 2, ItemType = "sead", ItemCount = 5 });
         }
         return buff;
     }
@@ -123,39 +122,29 @@ public class Inv : MonoBehaviour {
     public static void FillInventory(string page)
     {
         currSelect = -1;
-        XmlDocument buff;
-        TextAsset bindataBuff;
         for (int i = 0; i < items.Count; i++)
         {
             switch (items[i].ItemType)
             {
                 case "sead":
-                    buff = new XmlDocument();
-                    bindataBuff = Resources.Load("XML/Seads") as TextAsset;
-                    buff.LoadXml(bindataBuff.text);
-                    XmlElement rootS = buff.DocumentElement;
-                    foreach (XmlElement sead in rootS)
+                    foreach (PlantItem sead in PlantList.seads)
                     {
-                        if (sead.ChildNodes[0].InnerText == items[i].Id.ToString())
+                        if (sead.id == items[i].Id)
                         {
-                            items[i].ItemPrice = System.Convert.ToInt32(sead.ChildNodes[1].InnerText);
-                            items[i].SpritePath = sead.ChildNodes[2].InnerText;
-                            items[i].ItemName = sead.ChildNodes[3].InnerText;
+                            items[i].ItemPrice = sead.price;
+                            items[i].SpritePath = sead.name;
+                            items[i].ItemName = sead.name;
                         }
                     }
                     break;
                 case "harvest":
-                    buff = new XmlDocument();
-                    bindataBuff = Resources.Load("XML/Harvest") as TextAsset;
-                    buff.LoadXml(bindataBuff.text);
-                    XmlElement rootH = buff.DocumentElement;
-                    foreach (XmlElement sead in rootH)
+                    foreach (PlantItem sead in PlantList.seads)
                     {
-                        if (sead.ChildNodes[0].InnerText == items[i].Id.ToString())
+                        if (sead.id == items[i].Id)
                         {
-                            items[i].ItemPrice = System.Convert.ToInt32(sead.ChildNodes[1].InnerText);
-                            items[i].SpritePath = sead.ChildNodes[2].InnerText;
-                            items[i].ItemName = sead.ChildNodes[3].InnerText;
+                            items[i].ItemPrice = sead.priceFruit;
+                            items[i].SpritePath = sead.name;
+                            items[i].ItemName = sead.name;
                         }
                     }
                     break;
@@ -197,15 +186,16 @@ public class Inv : MonoBehaviour {
             {
                 if (items[k].ItemType == currentType)
                 {
-                    inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath);
                     inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[k].ItemCount.ToString();
                     items[k].ItemId = k;
                     if (items[k].ItemType == "sead")
                     {
+                        inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath + "/Main");
                         inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Sead>().Init(items[k] as ItemInInventory);
                     }
                     else if(items[k].ItemType == "harvest")
                     {
+                        inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath + "/Fruit");
                         inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Harvest>().Init(items[k] as ItemInInventory);
                     }
                 }

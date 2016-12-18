@@ -31,6 +31,10 @@ public class Inv : MonoBehaviour {
         inventoryPanel = inv;
         actionPanel = act;
         filterPanel = filter;
+
+
+        ExpBar.current = 0;
+        ExpBar.max = 3;
     }
 
     public static void Select(int id)

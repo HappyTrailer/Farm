@@ -5,7 +5,7 @@ using System.Collections;
 
 public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public float max;
+    public static float max;
     public static float current;
     public Image scr;
     public Text txt;
@@ -35,9 +35,9 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         scr.color = new Color(color + change, color + change, color + change, 255);
     }
 
-    public void ChangeMax(float max)
+    public void ChangeMax(float max1)
     {
-        this.max = max;
+        max = max1;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

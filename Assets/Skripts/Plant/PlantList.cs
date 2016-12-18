@@ -13,7 +13,7 @@ public class PlantList : MonoBehaviour {
             id = 1,
             name = "Репа",
             level = 1,
-            time = 15,
+            time = 2,
             price = 1,
             priceFruit = 3,
             iterationFruit = 1,

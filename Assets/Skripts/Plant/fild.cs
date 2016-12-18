@@ -39,8 +39,8 @@ public class fild : MonoBehaviour
 
     void OnMouseOver()//тут метод появления времени роста при попадании мышки с значением оставшегося времени
     {
-        if(plant)
-        Debug.Log(plant.AllStage);
+        //if(plant)
+        //Debug.Log(plant.AllStage);
     }
     public void OnMouseUp()
     {

@@ -6,7 +6,6 @@ using System.Collections;
 public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static float money;
-    public static float donate;
 
     public Text moneytxt;
 
@@ -14,15 +13,7 @@ public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Update()
     {
-        switch (this.name)
-        {
-            case "money":
-                moneytxt.text = money.ToString();
-                break;
-            case "doante":
-                moneytxt.text = donate.ToString();
-                break;
-        }
+        moneytxt.text = money.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -9,6 +9,7 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public static float current;
     public Image scr;
     public Text txt;
+    public Text lvlTxt;
     public Image notify;
     public Text notifyText;
 
@@ -16,8 +17,9 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	void Update () {
         AnimExp();
+        lvlTxt.text = lvl.currentCountlvl.ToString();
         scr.fillAmount = current / max;
-        txt.text = (current / max * 100) + "%";
+        txt.text = (current / max * 100).ToString("F2") + "%";
         notifyText.text = current + " / " + max;
 	}
 
@@ -33,11 +35,6 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             change = 0.002f;
         }
         scr.color = new Color(color + change, color + change, color + change, 255);
-    }
-
-    public void ChangeMax(float max1)
-    {
-        max = max1;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -41,6 +41,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             {
                 Inv.inventoryPanel.SetActive(true);
                 Inv.filterPanel.SetActive(true);
+                Shop.shopPanel.SetActive(false);
                 Inv.FillInventory("first");
             }
             else

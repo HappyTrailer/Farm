@@ -32,7 +32,6 @@ public class Inv : MonoBehaviour {
         actionPanel = act;
         filterPanel = filter;
 
-
         ExpBar.current = 0;
         ExpBar.max = 3;
     }

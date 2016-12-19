@@ -9,59 +9,59 @@ public class MouseTool : MonoBehaviour {
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
-                switch (ToolCoice.currentTool)
+                switch (ToolsClick.currentTool)
                 {
                     case "arrow":
-                        ToolCoice.currentTool = "dig";
+                        ToolsClick.currentTool = "dig";
                         break;
                     case "dig":
-                        ToolCoice.currentTool = "watering";
+                        ToolsClick.currentTool = "watering";
                         break;
                     case "watering":
-                        ToolCoice.currentTool = "weed";
+                        ToolsClick.currentTool = "weed";
                         break;
                     case "weed":
-                        ToolCoice.currentTool = "vermin";
+                        ToolsClick.currentTool = "vermin";
                         break;
                     case "vermin":
-                        ToolCoice.currentTool = "hand";
+                        ToolsClick.currentTool = "hand";
                         break;
                     case "hand":
-                        ToolCoice.currentTool = "arrow";
+                        ToolsClick.currentTool = "arrow";
                         break;
                     case "planted":
-                        ToolCoice.currentTool = "arrow";
+                        ToolsClick.currentTool = "arrow";
                         break;
                 }
-                ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolCoice.currentTool);
+                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolsClick.currentTool);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
-                switch (ToolCoice.currentTool)
+                switch (ToolsClick.currentTool)
                 {
                     case "arrow":
-                        ToolCoice.currentTool = "hand";
+                        ToolsClick.currentTool = "hand";
                         break;
                     case "hand":
-                        ToolCoice.currentTool = "vermin";
+                        ToolsClick.currentTool = "vermin";
                         break;
                     case "vermin":
-                        ToolCoice.currentTool = "weed";
+                        ToolsClick.currentTool = "weed";
                         break;
                     case "weed":
-                        ToolCoice.currentTool = "watering";
+                        ToolsClick.currentTool = "watering";
                         break;
                     case "watering":
-                        ToolCoice.currentTool = "dig";
+                        ToolsClick.currentTool = "dig";
                         break;
                     case "dig":
-                        ToolCoice.currentTool = "arrow";
+                        ToolsClick.currentTool = "arrow";
                         break;
                     case "planted":
-                        ToolCoice.currentTool = "arrow";
+                        ToolsClick.currentTool = "arrow";
                         break;
                 }
-                ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolCoice.currentTool);
+                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolsClick.currentTool);
             }
         }
 	}

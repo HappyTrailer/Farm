@@ -104,7 +104,7 @@ public class fild : MonoBehaviour
 
     void GetMouseValue()                   // метод обработки клика мышкой по полю в зависимости от типа курсора
     {
-        switch (ToolCoice.currentTool)
+        switch (ToolsClick.currentTool)
         {
             //==========================================================
             case "dig":
@@ -190,8 +190,8 @@ public class fild : MonoBehaviour
 
                     if (Inv.items[Inv.currentSead.ItemId].ItemCount <= 0)
                     {
-                        ToolCoice.currentTool = "arrow";
-                        ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                        ToolsClick.currentTool = "arrow";
+                        ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
                         Inv.DropItem(Inv.currentSead.ItemId);
                     }
 

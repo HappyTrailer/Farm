@@ -8,26 +8,23 @@ using System.Collections;
 public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 	public Sprite texture;
-    public static Image globalCursor;
 	public Image CountryImg;
     private Image img;
     private Image seno;
-    public static string currentTool = "arrow";
     private bool hover = false;
 
     void Start()
     {
-        globalCursor = GameObject.Find("Cursor").GetComponent<Image>();
         seno = CountryImg.transform.GetChild(0).GetComponent<Image>();
         img = CountryImg.transform.GetChild(1).GetComponent<Image>();
     }
 
     void Update()
     {
-        if (currentTool == this.name)
+        if (ToolsClick.currentTool == this.name)
             seno.gameObject.SetActive(true);
         seno.transform.Rotate(Vector3.forward * -1);
-        if(seno.gameObject.activeSelf && ToolCoice.currentTool != this.name && !hover)
+        if (seno.gameObject.activeSelf && ToolsClick.currentTool != this.name && !hover)
             seno.gameObject.SetActive(false);
     }
 
@@ -35,8 +32,8 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     {
         if (this.name == "inventory")
         {
-            currentTool = "arrow";
-            globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+            ToolsClick.currentTool = "arrow";
+            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
             if (Inv.inventoryPanel.activeSelf == false)
             {
                 Inv.inventoryPanel.SetActive(true);
@@ -53,8 +50,8 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         }
         else
         {
-            globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
-            currentTool = this.name;
+            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
+            ToolsClick.currentTool = this.name;
         }
 	}
 
@@ -69,7 +66,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 	public void OnPointerExit(PointerEventData eventData)
     {
         hover = false;
-        if (ToolCoice.currentTool != this.name)
+        if (ToolsClick.currentTool != this.name)
             seno.gameObject.SetActive(false);
         img.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
 	}

@@ -48,6 +48,8 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        ToolsClick.currentTool = "arrow";
+        ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
         currSelectId = -1;
         Inv.actionPanel.SetActive(false);
         Inv.filterPanel.SetActive(false);

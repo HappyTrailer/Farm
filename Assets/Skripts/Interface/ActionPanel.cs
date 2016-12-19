@@ -46,8 +46,8 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 Inv.actionPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
                 Inv.filterPanel.SetActive(false);
-                ToolCoice.currentTool = "planted";
-                ToolCoice.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/cartoon-seeds");
+                ToolsClick.currentTool = "planted";
+                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/cartoon-seeds");
                 break;
             case "Buy":
                 break;

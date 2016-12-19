@@ -36,7 +36,6 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             }
         }
     }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);

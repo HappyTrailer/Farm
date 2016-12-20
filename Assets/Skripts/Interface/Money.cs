@@ -6,6 +6,7 @@ using System.Collections;
 public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static float money;
+    public static GameObject panel;
 
     public Text moneytxt;
 
@@ -13,6 +14,7 @@ public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Update()
     {
+        panel = GameObject.Find("money");
         moneytxt.text = money.ToString();
     }
 

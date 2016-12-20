@@ -5,7 +5,34 @@ public class MouseTool : MonoBehaviour {
 
 	void Update () 
     {
-        if (Inv.inventoryPanel.activeSelf == false)
+        if (Input.GetMouseButtonDown(2))
+        {
+            ToolsClick.currentTool = "arrow";
+            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+            Inv.actionPanel.SetActive(false);
+            Inv.filterPanel.SetActive(false);
+            Inv.inventoryPanel.SetActive(false);
+            Shop.shopPanel.SetActive(!Shop.shopPanel.activeSelf);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            ToolsClick.currentTool = "arrow";
+            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+            if (Inv.inventoryPanel.activeSelf == false)
+            {
+                Inv.inventoryPanel.SetActive(true);
+                Inv.filterPanel.SetActive(true);
+                Shop.shopPanel.SetActive(false);
+                Inv.FillInventory("first");
+            }
+            else
+            {
+                Inv.actionPanel.SetActive(false);
+                Inv.filterPanel.SetActive(false);
+                Inv.inventoryPanel.SetActive(false);
+            }
+        }
+        if (Inv.inventoryPanel.activeSelf == false && Shop.shopPanel.activeSelf == false)
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {

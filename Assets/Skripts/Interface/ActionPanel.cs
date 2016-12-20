@@ -49,8 +49,6 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 ToolsClick.currentTool = "planted";
                 ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/cartoon-seeds");
                 break;
-            case "Buy":
-                break;
         }
     }
 }

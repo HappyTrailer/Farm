@@ -30,33 +30,36 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
 	public void OnPointerClick(PointerEventData eventData)
     {
-        if (this.name == "inventory")
+        if (Inv.inventoryPanel.activeSelf == false && Shop.shopPanel.activeSelf == false)
         {
-            ToolsClick.currentTool = "arrow";
-            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
-            if (Inv.inventoryPanel.activeSelf == false)
+            if (this.name == "inventory")
             {
-                Inv.inventoryPanel.SetActive(true);
-                Inv.filterPanel.SetActive(true);
-                Shop.shopPanel.SetActive(false);
-                Inv.FillInventory("first");
+                ToolsClick.currentTool = "arrow";
+                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                if (Inv.inventoryPanel.activeSelf == false)
+                {
+                    Inv.inventoryPanel.SetActive(true);
+                    Inv.filterPanel.SetActive(true);
+                    Shop.shopPanel.SetActive(false);
+                    Inv.FillInventory("first");
+                }
+                else
+                {
+                    Inv.actionPanel.SetActive(false);
+                    Inv.filterPanel.SetActive(false);
+                    Inv.inventoryPanel.SetActive(false);
+                }
             }
             else
             {
-                Inv.actionPanel.SetActive(false);
-                Inv.filterPanel.SetActive(false);
-                Inv.inventoryPanel.SetActive(false);
+                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
+                ToolsClick.currentTool = this.name;
             }
-        }
-        else
-        {
-            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
-            ToolsClick.currentTool = this.name;
         }
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)
-	{
+    {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
         hover = true;
         seno.gameObject.SetActive(true);

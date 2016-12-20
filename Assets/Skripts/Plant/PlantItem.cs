@@ -19,7 +19,6 @@ public class PlantItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public int time { get; set; }
     public int level { get; set; }
     public string name { get; set; }
-
     private bool hovererd = false;
 
     public void Init(PlantItem item)
@@ -36,40 +35,28 @@ public class PlantItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         name = item.name;
     }
 
-    void Update()
-    {
-        if (!hovererd)
-        {
-            Color a = GetComponent<Image>().color;
-            if (Shop.currSelectId != transform.GetSiblingIndex())
-                GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
-        }
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        Inv.actionPanel.SetActive(true);
-        Inv.actionPanel.transform.GetChild(0).gameObject.SetActive(false);
-        Inv.actionPanel.transform.GetChild(1).gameObject.SetActive(false);
-        Inv.actionPanel.transform.GetChild(2).gameObject.SetActive(true);
-        Shop.currSelectId = transform.GetSiblingIndex();
-        Shop.currSelect = this;
+        if(Money.money >= this.price)
+        {
+            Money.money -= this.price;
+            Inv.GetHarvestToInventory(1, this.id, "sead");
+            GameObject.Find("Sounds").GetComponent<Sounds>().PlayBuy();
+        }
+        else
+        {
+            GameObject.Find("Sounds").GetComponent<Sounds>().PlayFail();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-        hovererd = true;
-        Color a = GetComponent<Image>().color;
-        if (Shop.currSelectId != transform.GetSiblingIndex())
-            GetComponent<Image>().color = new Color(a.r, a.g, a.b, 1);
+        transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        hovererd = false;
-        Color a = GetComponent<Image>().color;
-        if (Shop.currSelectId != transform.GetSiblingIndex())
-            GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
+        transform.localScale -= new Vector3(0.2f, 0.2f, 0.2f);
     }
 }

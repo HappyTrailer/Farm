@@ -9,8 +9,6 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 {
     public GameObject shopP;
     public static GameObject shopPanel;
-    public static PlantItem currSelect;
-    public static int currSelectId;
 
     void Start()
     {
@@ -20,19 +18,22 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     void FillShop()
     {
-        currSelectId = -1;
         List<PlantItem> items = PlantList.seads;
-        for (int i = 0; i < shopPanel.transform.childCount; i++)
+        for (int i = 0; i < shopPanel.transform.GetChild(0).childCount; i++)
         {
-            shopPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
-            shopPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
-            shopPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "";
-            Destroy(shopPanel.transform.GetChild(i).gameObject.GetComponent<PlantItem>());
             if (items.Count > i)
             {
-                shopPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = items[i].price.ToString();
-                shopPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].name + "/Main");
-                shopPanel.transform.GetChild(i).gameObject.AddComponent<PlantItem>().Init(items[i]);
+                shopPanel.transform.GetChild(0).GetChild(i).Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].name + "/Main");
+                shopPanel.transform.GetChild(0).GetChild(i).Find("Text").GetComponent<Text>().text = items[i].name +
+                    ". Цена продажи плодов: " + items[i].priceFruit.ToString() +
+                    ". Количество плодов: " + items[i].minCountFruit.ToString() + "-" + items[i].maxCountFruit.ToString() +
+                    ". Количество плодонесений: " + items[i].iterationFruit.ToString() +
+                    ". Количество опыта за сбор: " + items[i].countExpiriens.ToString() +
+                    ". Время роста: " + (items[i].time * 4).ToString() +
+                    ". Необходимый уровень плодов: " + items[i].level.ToString();
+                shopPanel.transform.GetChild(0).GetChild(i).Find("Buy").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/Buy");
+                shopPanel.transform.GetChild(0).GetChild(i).Find("Buy").gameObject.AddComponent<PlantItem>().Init(items[i]);
+                shopPanel.transform.GetChild(0).GetChild(i).Find("Price").GetComponent<Text>().text = items[i].price.ToString();
             }
         }
     }
@@ -50,7 +51,6 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         ToolsClick.currentTool = "arrow";
         ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
-        currSelectId = -1;
         Inv.actionPanel.SetActive(false);
         Inv.filterPanel.SetActive(false);
         Inv.inventoryPanel.SetActive(false);

@@ -85,7 +85,6 @@ public class Harvest : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterH
         Inv.actionPanel.SetActive(true);
         Inv.actionPanel.transform.GetChild(0).gameObject.SetActive(true);
         Inv.actionPanel.transform.GetChild(1).gameObject.SetActive(false);
-        Inv.actionPanel.transform.GetChild(2).gameObject.SetActive(false);
         Inv.currSelect = transform.GetSiblingIndex();
         Inv.currentHarv = this;
     }

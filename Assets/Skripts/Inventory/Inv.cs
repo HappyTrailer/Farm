@@ -49,13 +49,13 @@ public class Inv : MonoBehaviour {
         Inv.items.RemoveAt(id);
     }
 
-    public static void GetHarvestToInventory(int countFruit, int fruitId)
+    public static void GetHarvestToInventory(int countFruit, int fruitId, string type)
     {
         int curr = -1;
         foreach (Item item in items)
         {
             curr++;
-            if (item.ItemType == "harvest" && item.Id == fruitId && item.ItemCount < 10)
+            if (item.ItemType == type && item.Id == fruitId && item.ItemCount < 10)
             {
                 if (items[curr].ItemCount + countFruit > 10)
                 {
@@ -78,19 +78,19 @@ public class Inv : MonoBehaviour {
                 {
                     if (countFruit >= 10)
                     {
-                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = 10 });
+                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = type, ItemCount = 10 });
                         countFruit = countFruit - 10;
                     }
                     else
                     {
-                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = countFruit });
+                        items.Add(new ItemInInventory() { Id = fruitId, ItemType = type, ItemCount = countFruit });
                         countFruit = 0;
                     }
                 } while (countFruit != 0);
             }
             else
             {
-                items.Add(new ItemInInventory() { Id = fruitId, ItemType = "harvest", ItemCount = countFruit });
+                items.Add(new ItemInInventory() { Id = fruitId, ItemType = type, ItemCount = countFruit });
             }
         }
     }

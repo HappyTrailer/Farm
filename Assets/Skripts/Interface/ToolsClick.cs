@@ -28,14 +28,17 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-        if (!hover)
+        if (Inv.inventoryPanel.activeSelf == false && Shop.shopPanel.activeSelf == false)
         {
-            seno.gameObject.SetActive(true);
+            GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
+            if (!hover)
+            {
+                seno.gameObject.SetActive(true);
+            }
+            seno.transform.position += new Vector3(20, 20, 20);
+            img.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
+            img.transform.position += new Vector3(20, 20, 20);
         }
-        seno.transform.position += new Vector3(20, 20, 20);
-        img.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
-        img.transform.position += new Vector3(20, 20, 20);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -50,11 +53,11 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     }
 
 	public void OnPointerClick(PointerEventData eventData)
-	{
+    {
         hover = !hover;
-		foreach (GameObject panel in tools)
-			panel.SetActive (!flag);
-		flag = !flag;
+        foreach (GameObject panel in tools)
+            panel.SetActive(!flag);
+        flag = !flag;
 	}
 
 	/*public List<GameObject> FindTools(string tag)

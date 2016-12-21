@@ -10,18 +10,24 @@ using UnityEditor;
 public class Inv : MonoBehaviour {
 
     public static GameObject inventoryPanel;
-    public GameObject inv; 
     public static GameObject actionPanel;
-    public GameObject act;
     public static GameObject filterPanel;
+
+    public GameObject inv; 
+    public GameObject act;
     public GameObject filter;
+
     public static Sead currentSead;
-    public static string currentType;
     public static Harvest currentHarv;
-    public static int currSelect = -1;
-    public static List<Item> items;
+    public static Fertilizer currentFert;
+
+    public static string currentType;
+
     public static int k = 0;
     public static int countNext = 0;
+    public static int currSelect = -1;
+
+    public static List<Item> items;
     public static List<int> prevIndex = new List<int>();
 
     void Start()
@@ -118,6 +124,7 @@ public class Inv : MonoBehaviour {
         if (buff.Count == 0)
         {
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
+ 
         }
         return buff;
     }

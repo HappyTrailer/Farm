@@ -13,21 +13,16 @@ public class fild : MonoBehaviour
     GameObject Sounds;
     
 
-    /*1.По отношению к  игроку.
-        1.1. Грядка приобретенная игроком
-        1.2. Не приобретенная грядка
-        1.3. Грядка другого игрока
-    */
     byte havings;             // принадлежность
     bool dig;                 // вскопаность
-    public bool watering;               //политость
-    bool weed;                 //сорняки
-    bool fertilizer;           // удобрено или нет
+    public bool watering;     //политость
+    bool weed;                //сорняки
+    bool fertilizer;          // удобрено или нет
     double fertilizer_factor; // множитель удобрения
     bool vermin;  //вредители
     bool sown;    //засеяность
     bool hand;    //сбор
-    bool inventory;    //инвентарь
+    bool inventory;//инвентарь
     bool arrow;    //курсор
 
 
@@ -45,6 +40,15 @@ public class fild : MonoBehaviour
     public void OnMouseUp()
     {
         GetMouseValue();
+    }
+    public void ChangeFert(bool val,float tf)
+    {
+        Debug.Log("fert = " +  val);
+        if (val)
+            timeFactor -= tf;
+        else
+            timeFactor += tf;
+        fertilizer = val;
     }
     public void ChangeWeed(bool val)
     {
@@ -73,7 +77,7 @@ public class fild : MonoBehaviour
         {
             this.GetComponent<SpriteRenderer>().sprite = sandField;
             watering = !val;
-            Debug.Log(watering);
+            
             timeFactor += 0.2f;
         }
         else {
@@ -122,7 +126,7 @@ public class fild : MonoBehaviour
                             this.GetComponent<SpriteRenderer>().sprite = sandField;
                             ChangeWeed(false);
                             ChangeVermin(false);
-                            watering = true;
+                            ChangeFert(false, 0.0f);
                             ChangeWatering(true);
                             timeFactor = 1.0f;
                         }
@@ -136,11 +140,8 @@ public class fild : MonoBehaviour
                 {
                     GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudWatering();
                     events.AddFildEvent(idFild, 300.0f, "watering");
-                    ChangeWatering(false);
-                    
-                }
-                
-      
+                    ChangeWatering(false);                    
+                }  
                 break;
             //==========================================================
             case "weed":
@@ -148,13 +149,14 @@ public class fild : MonoBehaviour
                 {
                     GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudSprey();
                     ChangeWeed(!weed);
-                }
-                
+                }              
                 break;
             //==========================================================
-            case "fertilizer":
+            case "fertilizer":                 // доработать
                 if (!fertilizer)
-                    fertilizer = true;
+                {
+                    ChangeFert(true, Inv.currentFert.timeFactor);
+                }
                 break;
             //==========================================================
             case "vermin":

@@ -3,15 +3,16 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class Fertilizer : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public int item_id; 
+    public int item_id;
     public int id;
     public int itemPrice;
     public string itemName;
     public string itemType;
     public string spritePath;
     public int itemCount;
+    public float timeFactor;
 
     private bool hovererd = false;
 
@@ -77,7 +78,7 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         Color a = GetComponent<Image>().color;
         GetComponent<Image>().color = new Color(a.r, a.g, a.b, 1);
         Inv.currSelect = transform.GetSiblingIndex();
-        Inv.currentSead = this;
+        Inv.currentFert = this;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -86,7 +87,7 @@ public class Sead : MonoBehaviour, Item, IPointerClickHandler, IPointerEnterHand
         Inv.actionPanel.transform.GetChild(0).gameObject.SetActive(true);
         Inv.actionPanel.transform.GetChild(1).gameObject.SetActive(true);
         Inv.currSelect = transform.GetSiblingIndex();
-        Inv.currentSead = this;
+        Inv.currentFert = this;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

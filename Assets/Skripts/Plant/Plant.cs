@@ -34,7 +34,7 @@ public class Plant : MonoBehaviour
     public bool planted;   // посжено ли растение
     bool growing;
 
-    public string stage;   //стадия роста
+    public string stage;   //текущая стадия роста
 
     public void EndGrow()
     {
@@ -113,53 +113,7 @@ public class Plant : MonoBehaviour
                         break;
                 }
             }
-            //======================================================
-            //if (stage == "stage1" && currentStage > 0)
-            //{
-            //    Debug.Log(Time.deltaTime);
-            //    currentStage -= Time.deltaTime;
-
-            //    if (currentStage <= 0)
-            //    {
-            //        currentStage = stageTwo;
-            //        stage = "stage2";
-            //        shangeSprite("stage2");
-            //    }
-            //}
-            //else if (stage == "stage2" && currentStage > 0)
-            //{
-            //    currentStage -= Time.deltaTime;
-
-            //    if (currentStage <= 0)
-            //    {
-            //        currentStage = stageThree;
-            //        stage = "stage3";
-            //        shangeSprite("stage3");
-            //    }
-            //}
-            //else if (stage == "stage3" && currentStage > 0)
-            //{
-            //    currentStage -= Time.deltaTime;
-
-            //    if (currentStage <= 0)
-            //    {
-            //        currentStage = stageFour;
-            //        stage = "stage4";
-            //        shangeSprite("stage4");
-            //    }
-            //}
-            //else if (stage == "stage4" && currentStage > 0)
-            //{
-            //    currentStage -= Time.deltaTime;
-            //    if (currentStage <= 0)
-            //    {
-            //        currentStage = 0;
-            //        stage = "stage5"; 
-            //        shangeSprite("stage5");
-            //        growing = false;
-            //    }
-            //}
-            //======================================================
+           
         }
     }
 

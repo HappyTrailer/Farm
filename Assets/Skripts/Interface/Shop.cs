@@ -19,21 +19,21 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     void FillShop()
     {
         List<PlantItem> items = PlantList.seads;
-        for (int i = 0; i < shopPanel.transform.GetChild(0).childCount; i++)
+        for (int i = 0; i < shopPanel.transform.GetChild(0).GetChild(0).childCount; i++)
         {
             if (items.Count > i)
             {
-                shopPanel.transform.GetChild(0).GetChild(i).Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].name + "/Main");
-                shopPanel.transform.GetChild(0).GetChild(i).Find("Text").GetComponent<Text>().text = items[i].name +
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[i].name + "/Main");
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Text").GetComponent<Text>().text = items[i].name +
                     ". Цена продажи плодов: " + items[i].priceFruit.ToString() +
                     ". Количество плодов: " + items[i].minCountFruit.ToString() + "-" + items[i].maxCountFruit.ToString() +
                     ". Количество плодонесений: " + items[i].iterationFruit.ToString() +
                     ". Количество опыта за сбор: " + items[i].countExpiriens.ToString() +
                     ". Время роста: " + (items[i].time * 4).ToString() +
                     ". Необходимый уровень плодов: " + items[i].level.ToString();
-                shopPanel.transform.GetChild(0).GetChild(i).Find("Buy").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/Buy");
-                shopPanel.transform.GetChild(0).GetChild(i).Find("Buy").gameObject.AddComponent<PlantItem>().Init(items[i]);
-                shopPanel.transform.GetChild(0).GetChild(i).Find("Price").GetComponent<Text>().text = items[i].price.ToString();
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Buy").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/Buy");
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Buy").gameObject.AddComponent<PlantItem>().Init(items[i]);
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Price").GetComponent<Text>().text = items[i].price.ToString();
             }
         }
     }

@@ -13,7 +13,6 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     void Start()
     {
         shopPanel = shopP;
-        FillShop();
     }
 
     void FillShop()
@@ -32,8 +31,18 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                     ". Время роста: " + (items[i].time * 4).ToString() +
                     ". Необходимый уровень плодов: " + items[i].level.ToString();
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Buy").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/Buy");
-                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Buy").gameObject.AddComponent<PlantItem>().Init(items[i]);
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Price").GetComponent<Text>().text = items[i].price.ToString();
+                if (lvl.currentCountlvl >= items[i].level)
+                {
+                    shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Buy").gameObject.AddComponent<PlantItem>().Init(items[i]);
+                    shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Lock").gameObject.SetActive(false);
+                    shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
+                }
+                else
+                {
+                    shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Lock").gameObject.SetActive(true);
+                    shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 255);
+                }
             }
         }
     }
@@ -49,6 +58,7 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        FillShop();
         ToolsClick.currentTool = "arrow";
         ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
         Inv.actionPanel.SetActive(false);

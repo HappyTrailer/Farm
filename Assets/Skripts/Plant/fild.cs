@@ -32,10 +32,20 @@ public class fild : MonoBehaviour
     ListFildEvent events = new ListFildEvent();
 
 
-    void OnMouseOver()//тут метод появления времени роста при попадании мышки с значением оставшегося времени
+    public void OnMouseOver()//тут метод появления времени роста при попадании мышки с значением оставшегося времени
     {
         //if(plant)
         //Debug.Log(plant.AllStage);
+    }
+    public void OnMouseExit()
+    {
+        if (GetComponent<SpriteRenderer>().sortingOrder > 1000)
+            GetComponent<SpriteRenderer>().sortingOrder -= 1000;
+    }
+    public void OnMouseEnter()
+    {
+        if (sown)
+            GetComponent<SpriteRenderer>().sortingOrder += 1000;
     }
     public void OnMouseUp()
     {
@@ -98,7 +108,9 @@ public class fild : MonoBehaviour
     }
     void Update()   // В методе апдейт происходит просчет роста растения
     {
-        
+        transform.Find("plantSprite").GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
+        verminSprite.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 3;
+        weedSprite.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 2;
         if (plant != null)  // если растение существует продолжать просчет роста
         {
             plant.GrowingProces(timeFactor);  // метод просчета роста
@@ -206,7 +218,4 @@ public class fild : MonoBehaviour
                 break;
         }
     }
-
-
-   
 }

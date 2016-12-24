@@ -46,7 +46,10 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 Inv.actionPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
                 Inv.filterPanel.SetActive(false);
-                ToolsClick.currentTool = "planted";
+                if (Inv.currentType == "fertilizer")
+                    ToolsClick.currentTool = "fertilizer";
+                else
+                    ToolsClick.currentTool = "planted";
                 ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/cartoon-seeds");
                 break;
         }

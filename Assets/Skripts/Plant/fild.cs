@@ -20,7 +20,7 @@ public class fild : MonoBehaviour
     bool fertilizer;          // удобрено или нет
     double fertilizer_factor; // множитель удобрения
     bool vermin;  //вредители
-    bool sown;    //засеяность
+    public bool sown = false;    //засеяность
     bool hand;    //сбор
     bool inventory;//инвентарь
     bool arrow;    //курсор
@@ -34,8 +34,9 @@ public class fild : MonoBehaviour
 
     public void OnMouseOver()//тут метод появления времени роста при попадании мышки с значением оставшегося времени
     {
-        //if(plant)
-        //Debug.Log(plant.AllStage);
+        //if (plant)
+            //Debug.Log(plant.AllStage);
+            //Debug.Log(ToolsClick.currentTool);
     }
     public void OnMouseExit()
     {
@@ -53,7 +54,7 @@ public class fild : MonoBehaviour
     }
     public void ChangeFert(bool val,float tf)
     {
-        Debug.Log("fert = " +  val);
+        //Debug.Log("fert = " +  val);
         if (val)
             timeFactor -= tf;
         else
@@ -130,6 +131,7 @@ public class fild : MonoBehaviour
                     {
                         if (plant.stage == "stage6")
                         {
+                            sown = false;
                             GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudDiging();
 
                             plant.EndGrow();
@@ -165,8 +167,16 @@ public class fild : MonoBehaviour
                 break;
             //==========================================================
             case "fertilizer":                 // доработать
-                if (!fertilizer)
+                if (!fertilizer && sown)
                 {
+                    Inv.items[Inv.currentFert.ItemId].ItemCount -= 1;
+
+                    if (Inv.items[Inv.currentFert.ItemId].ItemCount <= 0)
+                    {
+                        ToolsClick.currentTool = "arrow";
+                        ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                        Inv.DropItem(Inv.currentFert.ItemId);
+                    }
                     ChangeFert(true, Inv.currentFert.timeFactor);
                 }
                 break;
@@ -199,6 +209,7 @@ public class fild : MonoBehaviour
             case "planted":
                 if (plant == null)
                 {
+                    sown = true;
                     dig = false;
                     Inv.items[Inv.currentSead.ItemId].ItemCount -= 1;
 

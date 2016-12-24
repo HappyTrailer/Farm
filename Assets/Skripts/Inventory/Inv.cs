@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditor;
 
 public class Inv : MonoBehaviour {
 
@@ -48,6 +47,8 @@ public class Inv : MonoBehaviour {
             inventoryPanel.transform.GetChild(id).gameObject.GetComponent<Sead>().Select();
         else if (currentType == "harvest")
             inventoryPanel.transform.GetChild(id).gameObject.GetComponent<Harvest>().Select();
+        else if (currentType == "fertilizer")
+            inventoryPanel.transform.GetChild(id).gameObject.GetComponent<Fertilizer>().Select();
     }
 
     public static void DropItem(int id)
@@ -124,7 +125,7 @@ public class Inv : MonoBehaviour {
         if (buff.Count == 0)
         {
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
- 
+            buff.Add(new ItemInInventory() { Id = 1, ItemType = "fertilizer", ItemCount = 10 });
         }
         return buff;
     }
@@ -158,7 +159,16 @@ public class Inv : MonoBehaviour {
                         }
                     }
                     break;
-                case "tool":
+                case "fertilizer":
+                    foreach (FertItem sead in PlantList.ferts)
+                    {
+                        if (sead.id == items[i].Id)
+                        {
+                            items[i].ItemPrice = sead.itemPrice;
+                            items[i].SpritePath = sead.itemName;
+                            items[i].ItemName = sead.itemName;
+                        }
+                    }
                     break;
             }
         }
@@ -170,7 +180,7 @@ public class Inv : MonoBehaviour {
         else if (page == "next")
         {
             countNext++;
-            prevIndex.Add(inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Harvest>().ItemId);
+            prevIndex.Add(inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Harvest>().ItemId);//////
         }
         else if (page == "prev")
         {
@@ -184,14 +194,17 @@ public class Inv : MonoBehaviour {
                 k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Harvest>().ItemId;
             else if (Inv.currentType == "sead")
                 k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Sead>().ItemId;
+            else if (Inv.currentType == "fertilizer")
+                k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Sead>().ItemId;
         }
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
             inventoryPanel.transform.GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
-            inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
+            inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/UIMask");
             inventoryPanel.transform.GetChild(i).GetChild(0).GetChild(0).transform.GetComponent<Text>().text = "";
             Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Harvest>());
             Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Sead>());
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject.GetComponent<Fertilizer>());
             if (items.Count > k)
             {
                 if (items[k].ItemType == currentType)
@@ -207,6 +220,11 @@ public class Inv : MonoBehaviour {
                     {
                         inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath + "/Fruit");
                         inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Harvest>().Init(items[k] as ItemInInventory);
+                    }
+                    else if (items[k].ItemType == "fertilizer")
+                    {
+                        inventoryPanel.transform.GetChild(i).GetChild(0).transform.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/" + items[k].SpritePath);
+                        inventoryPanel.transform.GetChild(i).gameObject.AddComponent<Fertilizer>().Init(items[k] as ItemInInventory);
                     }
                 }
                 else

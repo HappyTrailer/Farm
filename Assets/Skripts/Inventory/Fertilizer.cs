@@ -22,6 +22,12 @@ public class Fertilizer : MonoBehaviour, Item, IPointerClickHandler, IPointerEnt
         set { itemPrice = value; }
     }
 
+    public float TimeFactor
+    {
+        get { return timeFactor; }
+        set { timeFactor = value; }
+    }
+
     public string ItemName
     {
         get { return itemName; }
@@ -52,15 +58,22 @@ public class Fertilizer : MonoBehaviour, Item, IPointerClickHandler, IPointerEnt
         set { id = value; }
     }
 
-    public void Init(ItemInInventory sead)
+    public int ItemCount
     {
-        this.Id = sead.Id;
-        this.ItemPrice = sead.ItemPrice;
-        this.ItemType = sead.ItemType;
-        this.SpritePath = sead.SpritePath;
-        this.ItemName = sead.ItemName;
-        this.ItemCount = sead.ItemCount;
-        this.ItemId = sead.ItemId;
+        get { return itemCount; }
+        set { itemCount = value; }
+    }
+
+    public void Init(ItemInInventory fert)
+    {
+        this.Id = fert.Id;
+        this.ItemPrice = fert.ItemPrice;
+        this.ItemType = fert.ItemType;
+        this.SpritePath = fert.SpritePath;
+        this.ItemName = fert.ItemName;
+        this.ItemCount = fert.ItemCount;
+        this.ItemId = fert.ItemId;
+        this.TimeFactor = PlantList.ferts[fert.Id - 1].timeFactor;
     }
 
     void Update()
@@ -105,12 +118,5 @@ public class Fertilizer : MonoBehaviour, Item, IPointerClickHandler, IPointerEnt
         Color a = GetComponent<Image>().color;
         if (Inv.currSelect != transform.GetSiblingIndex())
             GetComponent<Image>().color = new Color(a.r, a.g, a.b, 0.4f);
-    }
-
-
-    public int ItemCount
-    {
-        get { return itemCount; }
-        set { itemCount = value; }
     }
 }

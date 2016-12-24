@@ -4,16 +4,43 @@ using System.Collections.Generic;
 
 public class PlantList : MonoBehaviour {
 
-    public static List<PlantItem> seads;
+    public static List<FertItem> ferts;
+    public static List<PlantItem> seads; 
 
-	void Start () {
+    void Start()
+    {
+        ferts = new List<FertItem>();
+        ferts.Add(new FertItem()
+        {
+            id = 1,
+            itemName = "Удобрение 1",
+            itemPrice = 5,
+            itemType = "fertilizer",
+            timeFactor = 0.1f
+        });
+        ferts.Add(new FertItem()
+        {
+            id = 2,
+            itemName = "Удобрение 2",
+            itemPrice = 10,
+            itemType = "fertilizer",
+            timeFactor = 0.2f
+        });
+        ferts.Add(new FertItem()
+        {
+            id = 3,
+            itemName = "Удобрение 3",
+            itemPrice = 20,
+            itemType = "fertilizer",
+            timeFactor = 0.3f
+        });
         seads = new List<PlantItem>();
         seads.Add(new PlantItem()
         {
             id = 1,
             name = "Репа",
             level = 1,
-            time = 2,
+            time = 15,
             price = 1,
             priceFruit = 3,
             iterationFruit = 1,

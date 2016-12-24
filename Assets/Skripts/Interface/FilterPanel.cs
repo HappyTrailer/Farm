@@ -22,7 +22,7 @@ public class FilterPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         switch (this.name)
         {
             case "Tool":
-                Inv.currentType = "tool";
+                Inv.currentType = "fertilizer";
                 Inv.FillInventory("first");
                 break;
             case "Sead":

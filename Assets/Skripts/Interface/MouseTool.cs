@@ -59,6 +59,9 @@ public class MouseTool : MonoBehaviour {
                     case "planted":
                         ToolsClick.currentTool = "arrow";
                         break;
+                    case "fertilizer":
+                        ToolsClick.currentTool = "arrow";
+                        break;
                 }
                 ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolsClick.currentTool);
             }
@@ -85,6 +88,9 @@ public class MouseTool : MonoBehaviour {
                         ToolsClick.currentTool = "arrow";
                         break;
                     case "planted":
+                        ToolsClick.currentTool = "arrow";
+                        break;
+                    case "fertilizer":
                         ToolsClick.currentTool = "arrow";
                         break;
                 }

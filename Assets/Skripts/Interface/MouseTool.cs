@@ -7,6 +7,7 @@ public class MouseTool : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(2))
         {
+            Shop.FillShop();
             ToolsClick.currentTool = "arrow";
             ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
             Inv.actionPanel.SetActive(false);

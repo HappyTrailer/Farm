@@ -52,11 +52,11 @@ public class PlantItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-        transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
+        transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.localScale -= new Vector3(0.2f, 0.2f, 0.2f);
+        transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
     }
 }

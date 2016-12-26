@@ -39,7 +39,7 @@ public class PlantList : MonoBehaviour {
         {
             id = 1,
             name = "Репа",
-            level = 1,
+            level = 0,
             time = 15,
             price = 1,
             priceFruit = 3,
@@ -52,7 +52,7 @@ public class PlantList : MonoBehaviour {
         {
             id = 2,
             name = "Морковь",
-            level = 3,
+            level = 2,
             time = 30,
             price = 3,
             priceFruit = 10,
@@ -65,7 +65,7 @@ public class PlantList : MonoBehaviour {
         {
             id = 3,
             name = "Картофель",
-            level = 6,
+            level = 5,
             time = 45,
             price = 12,
             priceFruit = 14,

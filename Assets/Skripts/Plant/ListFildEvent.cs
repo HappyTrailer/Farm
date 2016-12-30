@@ -7,8 +7,7 @@ public class ListFildEvent : MonoBehaviour
     //список запланированых событий
     //осушение грядок появление сорняков,  вредителей 
 
-
-    static List<fildEvents> list;
+    public static List<fildEvents> list;
     public GameObject filds;
     //ListFild listfild;
     // Update is called once per frame
@@ -52,7 +51,7 @@ public class ListFildEvent : MonoBehaviour
     }
     public void GenEvent(int id, float timeGrow, string type)
     {
-       int countEv = Random.Range(0, 2);
+        int countEv = Random.Range(0, 2);
         float timeEvent;
         for (int i = 0; i < countEv; i++)
         {
@@ -68,32 +67,26 @@ public class ListFildEvent : MonoBehaviour
         {
             if (child.name == "fild_" + (idFild + 1))
             {
-               // Debug.Log("1111111111111");
-
-
                 switch (typeEvent)
                 {
-
                     case "watering":
-                        {
-                            child.GetComponent<fild>().ChangeWatering(true);
-
-                            break;
-                        }
+                    {
+                        child.GetComponent<fild>().ChangeWatering(true);
+                        break;
+                    }
                     case "vermin":
-                        {
-                            child.GetComponent<fild>().ChangeVermin(true);
-                            break;
-                        }
+                    {
+                        child.GetComponent<fild>().ChangeVermin(true);
+                        break;
+                    }
                     case "weed":
-                        {
-                            child.GetComponent<fild>().ChangeWeed(true);
-                            break;
-                        }
+                    {
+                        child.GetComponent<fild>().ChangeWeed(true);
+                        break;
+                    }
                 }
             }
         }
     }
-
 
 }

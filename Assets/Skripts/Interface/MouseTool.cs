@@ -5,19 +5,6 @@ public class MouseTool : MonoBehaviour {
 
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Inv.inventoryPanel.activeSelf)
-            {
-                Inv.actionPanel.SetActive(false);
-                Inv.filterPanel.SetActive(false);
-                Inv.inventoryPanel.SetActive(false);
-            }
-            else if (Shop.shopPanel.activeSelf)
-            {
-                Shop.shopPanel.SetActive(!Shop.shopPanel.activeSelf);
-            }
-        }
         if (Input.GetMouseButtonDown(2))
         {
             Shop.FillShop();

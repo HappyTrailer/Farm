@@ -8,10 +8,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class Inv : MonoBehaviour {
 
+    public static GameObject buyFildPanel;
     public static GameObject inventoryPanel;
     public static GameObject actionPanel;
     public static GameObject filterPanel;
 
+    public GameObject buy; 
     public GameObject inv; 
     public GameObject act;
     public GameObject filter;
@@ -19,6 +21,7 @@ public class Inv : MonoBehaviour {
     public static Sead currentSead;
     public static Harvest currentHarv;
     public static Fertilizer currentFert;
+    public static fild currFild;
 
     public static string currentType;
 
@@ -33,6 +36,7 @@ public class Inv : MonoBehaviour {
     {
         currentType = "sead";
         items = Load();
+        buyFildPanel = buy;
         inventoryPanel = inv;
         actionPanel = act;
         filterPanel = filter;
@@ -249,5 +253,31 @@ public class Inv : MonoBehaviour {
     void OnApplicationQuit()
     {
         Save(items);
+    }
+
+    public void CancelBuy()
+    {
+        Inv.buyFildPanel.SetActive(false);
+    }
+
+    public void ApplyBuy()
+    {
+        if(Money.money >= currFild.idFild * 10 * 1.5)
+        {
+            Money.money -= (float)(currFild.idFild * 10 * 1.5);
+            GameObject.Find("Sounds").GetComponent<Sounds>().PlayBuy();
+            Inv.buyFildPanel.SetActive(false);
+            currFild.locked = false;
+            currFild.GetComponent<SpriteRenderer>().sprite = currFild.sandField;
+            currFild.transform.GetChild(3).gameObject.SetActive(false);
+            if (fild.nextFild <= 48)
+            {
+                fild.nextFild++;
+                PlayerPrefs.SetFloat("NextFild", fild.nextFild);
+                GameObject.Find("Field").transform.GetChild(fild.nextFild).transform.GetChild(3).gameObject.SetActive(true);
+            }
+        }
+        else
+            GameObject.Find("Sounds").GetComponent<Sounds>().PlayFail();
     }
 }

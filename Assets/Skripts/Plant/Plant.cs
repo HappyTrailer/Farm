@@ -6,6 +6,7 @@ using System;
 public class Plant : MonoBehaviour
 {
     public int fruitId;
+    public string name;
     public double oldTimeFactor; // множитель времени роста 
 
     public int mincountFruit; // количество плодов
@@ -35,6 +36,58 @@ public class Plant : MonoBehaviour
     bool growing;
 
     public string stage;   //текущая стадия роста
+
+    public void Load(SavePlant p)
+    {
+        name = p.name;
+        fruitId = p.fruitId;
+        oldTimeFactor = p.oldTimeFactor; // множитель времени роста 
+        mincountFruit = p.mincountFruit; // количество плодов
+        maxcountFruit = p.maxcountFruit; // количество плодов
+        iterationFruit = p.iterationFruit; // количество раз плодоношения
+        countExpiriens = p.countExpiriens; // количество опыта
+        stageOne = p.stageOne;
+        stageTwo = p.stageTwo;
+        stageThree = p.stageThree;
+        stageFour = p.stageFour;
+        buffStageThree = p.buffStageThree;
+        buffStageFour = p.buffStageFour;
+        currentStage = p.currentStage;
+        pl1 = Resources.Load<Sprite>("Sprite/Plant/" + p.name + "/pl1"); // семена
+        pl2 = Resources.Load<Sprite>("Sprite/Plant/" + p.name + "/pl2"); // росток
+        pl3 = Resources.Load<Sprite>("Sprite/Plant/" + p.name + "/pl3"); // росток 2
+        pl4 = Resources.Load<Sprite>("Sprite/Plant/" + p.name + "/pl4"); // цветение
+        pl5 = Resources.Load<Sprite>("Sprite/Plant/" + p.name + "/pl5"); // плодоношение
+        pl6 = Resources.Load<Sprite>("Sprite/Plant/" + p.name + "/pl6"); // сухой стебель
+        planted = p.planted;   // посжено ли растение
+        growing = p.growing;
+        stage = p.stage;
+    }
+
+    public SavePlant Save()
+    {
+        SavePlant p = new SavePlant()
+        {
+            name = this.name,
+            fruitId = this.fruitId,
+            oldTimeFactor = this.oldTimeFactor,
+            mincountFruit = this.mincountFruit,
+            maxcountFruit = this.maxcountFruit,
+            iterationFruit = this.iterationFruit,
+            countExpiriens = this.countExpiriens,
+            stageOne = this.stageOne,
+            stageTwo = this.stageTwo,
+            stageThree = this.stageThree,
+            stageFour = this.stageFour,
+            buffStageThree = this.buffStageThree,
+            buffStageFour = this.buffStageFour,
+            currentStage = this.currentStage,
+            planted = this.planted,
+            growing = this.growing,
+            stage = this.stage
+        };
+        return p;
+    }
 
     public void EndGrow()
     {
@@ -123,6 +176,7 @@ public class Plant : MonoBehaviour
         {
             if (item.id == sead.Id)
             {
+                name = item.name;
                 maxcountFruit = item.maxCountFruit;
                 mincountFruit = item.minCountFruit;
                 iterationFruit = item.iterationFruit - 1;
@@ -145,7 +199,7 @@ public class Plant : MonoBehaviour
         }
     }
 
-    void shangeSprite(string s)
+    public void shangeSprite(string s)
     {
         switch (s)
         {

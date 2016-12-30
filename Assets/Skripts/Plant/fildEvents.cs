@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
+[Serializable]
 //клас элемент списка для листа событий
-public class fildEvents : MonoBehaviour 
+public class fildEvents
 {
     int _fild;                //поле относительно которого выполняется событие        
     System.DateTime _time;     // время события
@@ -18,6 +20,7 @@ public class fildEvents : MonoBehaviour
     public System.DateTime TimeEvent
     {
         get {   return _time; }
+        set { _time = value; }
     }
     public int FildId
     {

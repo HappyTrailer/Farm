@@ -30,31 +30,28 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
 	public void OnPointerClick(PointerEventData eventData)
     {
-        if (Inv.inventoryPanel.activeSelf == false && Shop.shopPanel.activeSelf == false)
+        if (this.name == "inventory")
         {
-            if (this.name == "inventory")
+            ToolsClick.currentTool = "arrow";
+            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+            if (Inv.inventoryPanel.activeSelf == false)
             {
-                ToolsClick.currentTool = "arrow";
-                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
-                if (Inv.inventoryPanel.activeSelf == false)
-                {
-                    Inv.inventoryPanel.SetActive(true);
-                    Inv.filterPanel.SetActive(true);
-                    Shop.shopPanel.SetActive(false);
-                    Inv.FillInventory("first");
-                }
-                else
-                {
-                    Inv.actionPanel.SetActive(false);
-                    Inv.filterPanel.SetActive(false);
-                    Inv.inventoryPanel.SetActive(false);
-                }
+                Inv.inventoryPanel.SetActive(true);
+                Inv.filterPanel.SetActive(true);
+                Shop.shopPanel.SetActive(false);
+                Inv.FillInventory("first");
             }
             else
             {
-                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
-                ToolsClick.currentTool = this.name;
+                Inv.actionPanel.SetActive(false);
+                Inv.filterPanel.SetActive(false);
+                Inv.inventoryPanel.SetActive(false);
             }
+        }
+        else
+        {
+            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
+            ToolsClick.currentTool = this.name;
         }
 	}
 

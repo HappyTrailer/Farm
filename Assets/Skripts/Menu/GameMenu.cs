@@ -17,7 +17,21 @@ public class GameMenu : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (settings.activeSelf)
+            if (Inv.buyFildPanel.activeSelf)
+            {
+                Inv.buyFildPanel.SetActive(false);
+            }
+            else if (Inv.inventoryPanel.activeSelf)
+            {
+                Inv.actionPanel.SetActive(false);
+                Inv.filterPanel.SetActive(false);
+                Inv.inventoryPanel.SetActive(false);
+            }
+            else if (Shop.shopPanel.activeSelf)
+            {
+                Shop.shopPanel.SetActive(false);
+            }
+            else if (settings.activeSelf)
             {
                 settings.SetActive(false);
                 menu.SetActive(true);

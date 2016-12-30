@@ -16,6 +16,14 @@ public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         panel = GameObject.Find("money");
         moneytxt.text = money.ToString();
+        PlayerPrefs.SetFloat("Money", money);
+    }
+
+    void Start()
+    {
+        money = PlayerPrefs.GetFloat("Money");
+        if (money < 50)
+            money = 500;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -21,7 +21,17 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         scr.fillAmount = current / max;
         txt.text = (current / max * 100).ToString("F2") + "%";
         notifyText.text = current + " / " + max;
+        PlayerPrefs.SetFloat("Exp", lvl.countExperience);
+        PlayerPrefs.SetFloat("Level", lvl.currentCountlvl);
 	}
+
+    void Start ()
+    {
+        lvl.currentCountlvl = (int)PlayerPrefs.GetFloat("Level");
+        lvl.countExperience = (int)PlayerPrefs.GetFloat("Exp"); 
+        current = (int)PlayerPrefs.GetFloat("Exp");
+        max = lvl.masLvl[lvl.currentCountlvl];
+    }
 
     private void AnimExp()
     {

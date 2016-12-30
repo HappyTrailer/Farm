@@ -28,17 +28,14 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Inv.inventoryPanel.activeSelf == false && Shop.shopPanel.activeSelf == false)
+        GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
+        if (!hover)
         {
-            GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-            if (!hover)
-            {
-                seno.gameObject.SetActive(true);
-            }
-            seno.transform.position += new Vector3(20, 20, 20);
-            img.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
-            img.transform.position += new Vector3(20, 20, 20);
+            seno.gameObject.SetActive(true);
         }
+        seno.transform.position += new Vector3(20, 20, 20);
+        img.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
+        img.transform.position += new Vector3(20, 20, 20);
     }
 
     public void OnPointerExit(PointerEventData eventData)

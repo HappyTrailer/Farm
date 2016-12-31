@@ -5,7 +5,7 @@ public class MouseTool : MonoBehaviour {
 
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(2) && GameMenu.settingsPanel.activeSelf == false && GameMenu.menuPanel.activeSelf == false)
         {
             Shop.FillShop();
             ToolsClick.currentTool = "arrow";
@@ -13,27 +13,36 @@ public class MouseTool : MonoBehaviour {
             Inv.actionPanel.SetActive(false);
             Inv.filterPanel.SetActive(false);
             Inv.inventoryPanel.SetActive(false);
+            Inv.buyFildPanel.SetActive(false);
             Shop.shopPanel.SetActive(!Shop.shopPanel.activeSelf);
+            if(Shop.shopPanel.activeSelf)
+                Inv.lockPanelInv.SetActive(true);
+            else
+                Inv.lockPanelInv.SetActive(false);
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && GameMenu.settingsPanel.activeSelf == false && GameMenu.menuPanel.activeSelf == false)
         {
             ToolsClick.currentTool = "arrow";
             ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
             if (Inv.inventoryPanel.activeSelf == false)
             {
+                Inv.lockPanelInv.SetActive(true);
                 Inv.inventoryPanel.SetActive(true);
                 Inv.filterPanel.SetActive(true);
                 Shop.shopPanel.SetActive(false);
+                Inv.buyFildPanel.SetActive(false);
                 Inv.FillInventory("first");
             }
             else
             {
+                Inv.lockPanelInv.SetActive(false);
                 Inv.actionPanel.SetActive(false);
                 Inv.filterPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
             }
         }
-        if (Inv.inventoryPanel.activeSelf == false && Shop.shopPanel.activeSelf == false)
+        if (Inv.inventoryPanel.activeSelf == false && Shop.shopPanel.activeSelf == false
+             && GameMenu.settingsPanel.activeSelf == false && GameMenu.menuPanel.activeSelf == false && Inv.buyFildPanel.activeSelf == false)
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {

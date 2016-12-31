@@ -8,8 +8,13 @@ public class GameMenu : MonoBehaviour {
     public GameObject settings;
     public AudioClip clipChek;
 
+    public static GameObject menuPanel;
+    public static GameObject settingsPanel;
+
     void Start()
     {
+        menuPanel = menu;
+        settingsPanel = settings;
         GameObject.Find("Audio Source").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Music");
     }
 
@@ -20,16 +25,19 @@ public class GameMenu : MonoBehaviour {
             if (Inv.buyFildPanel.activeSelf)
             {
                 Inv.buyFildPanel.SetActive(false);
+                Inv.lockPanelInv.SetActive(false);
             }
             else if (Inv.inventoryPanel.activeSelf)
             {
                 Inv.actionPanel.SetActive(false);
                 Inv.filterPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
+                Inv.lockPanelInv.SetActive(false);
             }
             else if (Shop.shopPanel.activeSelf)
             {
                 Shop.shopPanel.SetActive(false);
+                Inv.lockPanelInv.SetActive(false);
             }
             else if (settings.activeSelf)
             {
@@ -38,10 +46,12 @@ public class GameMenu : MonoBehaviour {
             }
             else if (!menu.activeSelf)
             {
+                Inv.lockPanel.SetActive(true);
                 menu.SetActive(true);
             }
             else if (menu.activeSelf)
             {
+                Inv.lockPanel.SetActive(false);
                 menu.SetActive(false);
             }
         }

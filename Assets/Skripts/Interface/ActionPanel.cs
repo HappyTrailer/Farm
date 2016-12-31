@@ -3,17 +3,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-        transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -51,6 +45,7 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 else
                     ToolsClick.currentTool = "planted";
                 ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/cartoon-seeds");
+                Inv.lockPanelInv.SetActive(false);
                 break;
         }
     }

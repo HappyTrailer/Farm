@@ -12,11 +12,15 @@ public class Inv : MonoBehaviour {
     public static GameObject inventoryPanel;
     public static GameObject actionPanel;
     public static GameObject filterPanel;
+    public static GameObject lockPanel;
+    public static GameObject lockPanelInv;
 
     public GameObject buy; 
     public GameObject inv; 
     public GameObject act;
     public GameObject filter;
+    public GameObject _lock;
+    public GameObject _lockInv;
 
     public static Sead currentSead;
     public static Harvest currentHarv;
@@ -36,6 +40,8 @@ public class Inv : MonoBehaviour {
     {
         currentType = "sead";
         items = Load();
+        lockPanel = _lock;
+        lockPanelInv = _lockInv;
         buyFildPanel = buy;
         inventoryPanel = inv;
         actionPanel = act;
@@ -258,6 +264,7 @@ public class Inv : MonoBehaviour {
     public void CancelBuy()
     {
         Inv.buyFildPanel.SetActive(false);
+        Inv.lockPanelInv.SetActive(false);
     }
 
     public void ApplyBuy()
@@ -276,6 +283,7 @@ public class Inv : MonoBehaviour {
                 PlayerPrefs.SetFloat("NextFild", fild.nextFild);
                 GameObject.Find("Field").transform.GetChild(fild.nextFild).transform.GetChild(3).gameObject.SetActive(true);
             }
+            Inv.lockPanelInv.SetActive(false);
         }
         else
             GameObject.Find("Sounds").GetComponent<Sounds>().PlayFail();

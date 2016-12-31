@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class PlantItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class PlantItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
     public int id {get; set;}
     public int price { get; set; }
@@ -52,11 +52,5 @@ public class PlantItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-        transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
     }
 }

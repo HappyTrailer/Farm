@@ -36,13 +36,16 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
             ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
             if (Inv.inventoryPanel.activeSelf == false)
             {
+                Inv.lockPanelInv.SetActive(true);
                 Inv.inventoryPanel.SetActive(true);
                 Inv.filterPanel.SetActive(true);
                 Shop.shopPanel.SetActive(false);
+                Inv.buyFildPanel.SetActive(false);
                 Inv.FillInventory("first");
             }
             else
             {
+                Inv.lockPanelInv.SetActive(false);
                 Inv.actionPanel.SetActive(false);
                 Inv.filterPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);

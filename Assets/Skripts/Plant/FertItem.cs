@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class FertItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class FertItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
     public int id { get; set; }
     public string itemName { get; set; }
@@ -41,11 +41,5 @@ public class FertItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     public void OnPointerEnter(PointerEventData eventData)
     {
         GameObject.Find("Sounds").GetComponent<Sounds>().PlaySoudTool();
-        transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
     }
 }

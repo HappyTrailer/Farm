@@ -28,6 +28,7 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             if (lvl.currentCountlvl >= itemsS[i].level)
             {
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Button").gameObject.AddComponent<PlantItem>().Init(itemsS[i]);
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Button").gameObject.AddComponent<Button>();
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Lock").gameObject.SetActive(false);
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 102);
             }
@@ -35,6 +36,9 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             {
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Lock").gameObject.SetActive(true);
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 255);
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Button").GetComponent<Image>().color = new Color32(150, 125, 0, 255);
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Image").Find("Image").GetComponent<Image>().color = new Color32(150, 125, 0, 255);
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Image").GetComponent<Image>().color = new Color32(150, 125, 0, 255);
             }
             k++;
         }
@@ -68,7 +72,12 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
         Inv.actionPanel.SetActive(false);
         Inv.filterPanel.SetActive(false);
-        Inv.inventoryPanel.SetActive(false);
+        Inv.inventoryPanel.SetActive(false); 
+        Inv.buyFildPanel.SetActive(false);
         shopPanel.SetActive(!shopPanel.activeSelf);
+        if (shopPanel.activeSelf)
+            Inv.lockPanelInv.SetActive(true);
+        else
+            Inv.lockPanelInv.SetActive(false);
     }
 }

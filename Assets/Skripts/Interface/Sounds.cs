@@ -10,8 +10,13 @@ public class Sounds : MonoBehaviour
     public AudioClip clipTool;
     public AudioClip clipBuy;
     public AudioClip clipFail;
+    public AudioClip clipFert;
     public GameObject camera;
 
+    public void PlayFert()
+    {
+        AudioSource.PlayClipAtPoint(clipFert, camera.transform.position, PlayerPrefs.GetFloat("Sounds"));
+    }
     public void PlayFail()
     {
         AudioSource.PlayClipAtPoint(clipFail, camera.transform.position, PlayerPrefs.GetFloat("Sounds"));

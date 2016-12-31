@@ -243,6 +243,7 @@ public class fild : MonoBehaviour
                             ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
                             Inv.DropItem(Inv.currentFert.ItemId);
                         }
+                        GameObject.Find("Sounds").GetComponent<Sounds>().PlayFert();
                         ChangeFert(true, Inv.currentFert.timeFactor);
                     }
                     break;
@@ -291,8 +292,15 @@ public class fild : MonoBehaviour
             if(idFild == nextFild)
             {
                 Inv.buyFildPanel.SetActive(true);
+                Inv.actionPanel.SetActive(false);
+                Inv.filterPanel.SetActive(false);
+                Inv.inventoryPanel.SetActive(false);
+                Shop.shopPanel.SetActive(false);
                 Inv.currFild = this;
                 GameObject.Find("PriceFild").GetComponent<Text>().text = (idFild * 10 * 1.5).ToString();
+                ToolsClick.currentTool = "arrow";
+                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                Inv.lockPanelInv.SetActive(true);
             }
         }
     }

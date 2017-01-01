@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.IO;
 using System;
 
@@ -88,17 +89,24 @@ public class fild : MonoBehaviour
     }
     public void OnMouseExit()
     {
-        if (GetComponent<SpriteRenderer>().sortingOrder > 1000)
-            GetComponent<SpriteRenderer>().sortingOrder -= 1000;
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            if (GetComponent<SpriteRenderer>().sortingOrder > 1000)
+                GetComponent<SpriteRenderer>().sortingOrder -= 1000;
+        }
     }
     public void OnMouseEnter()
     {
-        if (sown)
-            GetComponent<SpriteRenderer>().sortingOrder += 1000;
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            if (sown)
+                GetComponent<SpriteRenderer>().sortingOrder += 1000;
+        }
     }
     public void OnMouseUp()
     {
-        GetMouseValue();
+        if(!EventSystem.current.IsPointerOverGameObject())
+            GetMouseValue();
     }
     public void ChangeFert(bool val,float tf)
     {
@@ -289,7 +297,7 @@ public class fild : MonoBehaviour
         }
         else
         {
-            if(idFild == nextFild)
+            if (idFild == nextFild)
             {
                 Inv.buyFildPanel.SetActive(true);
                 Inv.actionPanel.SetActive(false);

@@ -7,18 +7,23 @@ public class MouseTool : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(2) && GameMenu.settingsPanel.activeSelf == false && GameMenu.menuPanel.activeSelf == false)
         {
-            Shop.FillShop();
             ToolsClick.currentTool = "arrow";
             ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
-            Inv.actionPanel.SetActive(false);
-            Inv.filterPanel.SetActive(false);
-            Inv.inventoryPanel.SetActive(false);
-            Inv.buyFildPanel.SetActive(false);
-            Shop.shopPanel.SetActive(!Shop.shopPanel.activeSelf);
-            if(Shop.shopPanel.activeSelf)
+            if (Shop.shopPanel.activeSelf == false)
+            {
+                Inv.actionPanel.SetActive(false);
+                Inv.filterPanel.SetActive(false);
+                Inv.inventoryPanel.SetActive(false);
+                Inv.buyFildPanel.SetActive(false);
+                Shop.shopPanel.SetActive(true);
                 Inv.lockPanelInv.SetActive(true);
+                Shop.FillShop();
+            }
             else
+            {
+                Shop.shopPanel.SetActive(false);
                 Inv.lockPanelInv.SetActive(false);
+            }
         }
         if (Input.GetMouseButtonDown(1) && GameMenu.settingsPanel.activeSelf == false && GameMenu.menuPanel.activeSelf == false)
         {

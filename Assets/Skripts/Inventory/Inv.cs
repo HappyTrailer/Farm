@@ -14,6 +14,7 @@ public class Inv : MonoBehaviour {
     public static GameObject filterPanel;
     public static GameObject lockPanel;
     public static GameObject lockPanelInv;
+    public static GameObject notifyPanel;
 
     public GameObject buy; 
     public GameObject inv; 
@@ -21,6 +22,7 @@ public class Inv : MonoBehaviour {
     public GameObject filter;
     public GameObject _lock;
     public GameObject _lockInv;
+    public GameObject notify;
 
     public static Sead currentSead;
     public static Harvest currentHarv;
@@ -40,6 +42,7 @@ public class Inv : MonoBehaviour {
     {
         currentType = "sead";
         items = Load();
+        notifyPanel = notify;
         lockPanel = _lock;
         lockPanelInv = _lockInv;
         buyFildPanel = buy;
@@ -112,7 +115,7 @@ public class Inv : MonoBehaviour {
         }
     }
 
-    public static void Save(List<Item> list)
+    public static void SaveInv(List<Item> list)
     {
         if (!Directory.Exists(Application.dataPath + "/Saves"))
             Directory.CreateDirectory(Application.dataPath + "/Saves");
@@ -258,7 +261,7 @@ public class Inv : MonoBehaviour {
 
     void OnApplicationQuit()
     {
-        Save(items);
+        SaveInv(items);
     }
 
     public void CancelBuy()

@@ -68,14 +68,6 @@ public class GameMenu : MonoBehaviour {
     {
         menu.SetActive(false);
     }
-    public void Save()
-    {
-
-    }
-    public void NewGame()
-    {
-
-    }
     public void Exit()
     {
         Application.Quit();

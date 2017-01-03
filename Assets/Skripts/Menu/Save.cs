@@ -7,7 +7,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-class Save : MonoBehaviour
+public class Save : MonoBehaviour
 {
     public List<SaveField> filds;
     public List<fildEvents> events;

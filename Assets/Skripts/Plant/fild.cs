@@ -32,6 +32,8 @@ public class fild : MonoBehaviour
     Plant plant;        // тут поле с класом растения
     ListFildEvent events = new ListFildEvent();
 
+    bool hover = false;
+
     public void Load(SaveField f)
     {
         plant = new Plant();
@@ -83,25 +85,41 @@ public class fild : MonoBehaviour
 
     public void OnMouseOver()//тут метод появления времени роста при попадании мышки с значением оставшегося времени
     {
-        //if (plant)
-            //Debug.Log(plant.AllStage);
-            //Debug.Log(ToolsClick.currentTool);
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            if (plant)
+            {
+                if (hover == false)
+                {
+                    Inv.notifyPanel.SetActive(true);
+                    Inv.notifyPanel.transform.position = Input.mousePosition + new Vector3(0f, 100f, 0f);
+                    hover = true;
+                }
+                if (plant.AllStage > 0)
+                    Inv.notifyPanel.transform.GetChild(0).GetComponent<Text>().text = (int)(plant.AllStage / 60) + " мин. " + (int)(plant.AllStage % 60) + " сек.";
+                else
+                    Inv.notifyPanel.transform.GetChild(0).GetComponent<Text>().text = "Готово к сбору!";
+                if (GetComponent<SpriteRenderer>().sortingOrder < 1000)
+                    GetComponent<SpriteRenderer>().sortingOrder += 1000;
+            }
+        }
+        else
+        {
+            Inv.notifyPanel.SetActive(false);
+            hover = false;
+        }
     }
     public void OnMouseExit()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (GetComponent<SpriteRenderer>().sortingOrder > 1000)
+            {
                 GetComponent<SpriteRenderer>().sortingOrder -= 1000;
+                hover = false;
+            }
         }
-    }
-    public void OnMouseEnter()
-    {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            if (sown)
-                GetComponent<SpriteRenderer>().sortingOrder += 1000;
-        }
+        Inv.notifyPanel.SetActive(false);
     }
     public void OnMouseUp()
     {

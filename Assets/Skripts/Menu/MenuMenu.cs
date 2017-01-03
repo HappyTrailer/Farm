@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.IO;
 
 public class MenuMenu : MonoBehaviour
 {
@@ -43,7 +44,9 @@ public class MenuMenu : MonoBehaviour
     }
     public void NewGame()
     {
-
+        PlayerPrefs.DeleteAll();
+        if (Directory.Exists(Application.dataPath + "/Saves"))
+            Directory.Delete(Application.dataPath + "/Saves", true);
     }
     public void Exit()
     {

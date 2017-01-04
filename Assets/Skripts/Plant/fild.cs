@@ -9,15 +9,14 @@ public class fild : MonoBehaviour
 {
     public int idFild;
 
-    public Sprite digedField;
-    public Sprite sandField;
-    public Sprite lockedSprite;
+    public static Sprite digedField;
+    public static Sprite sandField;
+    public static Sprite lockedSprite;
 
     GameObject verminSprite;
     GameObject weedSprite;
     GameObject Sounds;
     
-    public bool locked;
     bool dig;                 // вскопаность
     public bool watering;     //политость
     bool weed;                //сорняки
@@ -36,9 +35,10 @@ public class fild : MonoBehaviour
 
     public void Load(SaveField f)
     {
+        verminSprite = transform.FindChild("Vermin").gameObject;
+        weedSprite = transform.FindChild("Weed").gameObject;
         plant = new Plant();
         idFild = f.idFild;
-        locked = f.locked;
         dig = f.dig;
         watering = f.watering;
         weed = f.weed;
@@ -54,6 +54,13 @@ public class fild : MonoBehaviour
             this.GetComponentInChildren<Plant>().Load(f.plant);
             this.GetComponentInChildren<Plant>().shangeSprite(f.plant.stage);
             plant = this.GetComponentInChildren<Plant>();
+            if (weed)
+                weedSprite.SetActive(true);
+            if (vermin)
+                verminSprite.SetActive(true);
+        }
+        if (idFild < nextFild)
+        {
             if (watering)
                 GetComponent<SpriteRenderer>().sprite = digedField;
             else
@@ -66,7 +73,6 @@ public class fild : MonoBehaviour
         SaveField a = new SaveField() 
         {
             idFild = this.idFild,
-            locked = this.locked,
             dig = this.dig,
             watering = this.watering,
             weed = this.weed,
@@ -128,7 +134,6 @@ public class fild : MonoBehaviour
     }
     public void ChangeFert(bool val,float tf)
     {
-        //Debug.Log("fert = " +  val);
         if (val)
             timeFactor -= tf;
         else
@@ -137,7 +142,6 @@ public class fild : MonoBehaviour
     }
     public void ChangeWeed(bool val)
     {
-
         weedSprite.SetActive(val);
         if (!val)
             timeFactor -= 0.2f;
@@ -147,7 +151,6 @@ public class fild : MonoBehaviour
     }
     public void ChangeVermin(bool val)
     {
-
         verminSprite.SetActive(val);
         if (!val)
             timeFactor -= 0.2f;
@@ -173,29 +176,16 @@ public class fild : MonoBehaviour
     }
     void Start()
     {
-        nextFild = (int)PlayerPrefs.GetFloat("NextFild");
-        if (nextFild < 3)
-            nextFild = 3;
-        verminSprite = transform.FindChild("Vermin").gameObject;
-        weedSprite = transform.FindChild("Weed").gameObject;
         lockedSprite = Resources.Load<Sprite>("Sprite/Bad/lockField");
         digedField = Resources.Load<Sprite>("Sprite/Bad/digedField");
         sandField = Resources.Load<Sprite>("Sprite/Bad/sandField");
+        nextFild = (int)PlayerPrefs.GetFloat("NextFild");
+        if (nextFild < 3)
+            nextFild = 3;
         if (idFild == nextFild)
-        {
             transform.GetChild(3).gameObject.SetActive(true);
-        }
-        if (locked && idFild >= nextFild)
+        if (idFild >= nextFild)
             GetComponent<SpriteRenderer>().sprite = lockedSprite;
-        else
-        {
-            if(watering)
-                GetComponent<SpriteRenderer>().sprite = digedField;
-            else
-                GetComponent<SpriteRenderer>().sprite = sandField;
-            locked = false;
-        }
-
     }
     void Update()   // В методе апдейт происходит просчет роста растения
     {
@@ -211,7 +201,7 @@ public class fild : MonoBehaviour
 
     void GetMouseValue()                   // метод обработки клика мышкой по полю в зависимости от типа курсора
     {
-        if (!locked)
+        if (idFild < nextFild)
         {
             switch (ToolsClick.currentTool)
             {

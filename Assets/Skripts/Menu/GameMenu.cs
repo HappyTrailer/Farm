@@ -47,6 +47,8 @@ public class GameMenu : MonoBehaviour {
             }
             else if (!menu.activeSelf)
             {
+                ToolsClick.currentTool = "arrow";
+                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
                 Inv.lockPanel.SetActive(true);
                 menu.SetActive(true);
             }

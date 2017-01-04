@@ -8,6 +8,7 @@ public class fildEvents
 {
     int _fild;                //поле относительно которого выполняется событие        
     System.DateTime _time;     // время события
+    System.DateTime _timeLeft;
     string _type;              // тип события
     public fildEvents(int id, float t, string s)
     {
@@ -25,6 +26,11 @@ public class fildEvents
     public int FildId
     {
         get { return _fild; }
+    }
+    public System.DateTime TimeLeft
+    {
+        get { return _timeLeft; }
+        set { _timeLeft = value; }
     }
     public string FildEvent
     {

@@ -277,8 +277,7 @@ public class Inv : MonoBehaviour {
             Money.money -= (float)(currFild.idFild * 10 * 1.5);
             GameObject.Find("Sounds").GetComponent<Sounds>().PlayBuy();
             Inv.buyFildPanel.SetActive(false);
-            currFild.locked = false;
-            currFild.GetComponent<SpriteRenderer>().sprite = currFild.sandField;
+            currFild.GetComponent<SpriteRenderer>().sprite = fild.sandField;
             currFild.transform.GetChild(3).gameObject.SetActive(false);
             if (fild.nextFild <= 48)
             {

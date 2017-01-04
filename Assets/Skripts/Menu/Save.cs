@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
@@ -15,7 +16,6 @@ public class Save : MonoBehaviour
     public void MySave()
     {
         filds = new List<SaveField>();
-        events = ListFildEvent.list;
         foreach (Transform child in GameObject.Find("Field").transform)
         {
             filds.Add(child.GetComponent<fild>().Save());
@@ -26,6 +26,12 @@ public class Save : MonoBehaviour
         BinaryFormatter formater1 = new BinaryFormatter();
         formater1.Serialize(fs1, filds);
         fs1.Close();
+
+        events = ListFildEvent.list;
+        foreach (fildEvents ev in events)
+        {
+            ev.TimeLeft = new DateTime(ev.TimeEvent.Subtract(DateTime.Now).Ticks);
+        }
         FileStream fs2 = new FileStream(Application.dataPath + "/Saves/ev.sv", FileMode.Create);
         BinaryFormatter formater2 = new BinaryFormatter();
         formater2.Serialize(fs2, events);
@@ -56,7 +62,7 @@ public class Save : MonoBehaviour
             List<fildEvents> buff = (List<fildEvents>)formater.Deserialize(fs);
             for(int i = 0; i < buff.Count; i++)
             {
-                buff[i].TimeEvent = System.DateTime.Now + (System.DateTime.Now - buff[i].TimeEvent);
+                buff[i].TimeEvent = DateTime.Now.Add(TimeSpan.FromTicks(buff[i].TimeLeft.Ticks));
             }
             ListFildEvent.list = buff;
             fs.Close();

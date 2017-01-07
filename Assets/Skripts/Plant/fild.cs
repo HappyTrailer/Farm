@@ -12,10 +12,6 @@ public class fild : MonoBehaviour
     public static Sprite digedField;
     public static Sprite sandField;
     public static Sprite lockedSprite;
-
-    GameObject verminSprite;
-    GameObject weedSprite;
-    GameObject Sounds;
     
     bool dig;                 // вскопаность
     public bool watering;     //политость
@@ -35,8 +31,6 @@ public class fild : MonoBehaviour
 
     public void Load(SaveField f)
     {
-        verminSprite = transform.FindChild("Vermin").gameObject;
-        weedSprite = transform.FindChild("Weed").gameObject;
         plant = new Plant();
         idFild = f.idFild;
         dig = f.dig;
@@ -55,9 +49,9 @@ public class fild : MonoBehaviour
             this.GetComponentInChildren<Plant>().shangeSprite(f.plant.stage);
             plant = this.GetComponentInChildren<Plant>();
             if (weed)
-                weedSprite.SetActive(true);
+                transform.Find("Weed").gameObject.SetActive(true);
             if (vermin)
-                verminSprite.SetActive(true);
+                transform.Find("Vermin").gameObject.SetActive(true);
         }
         if (idFild < nextFild)
         {
@@ -105,13 +99,15 @@ public class fild : MonoBehaviour
                     Inv.notifyPanel.transform.GetChild(0).GetComponent<Text>().text = (int)(plant.AllStage / 60) + " мин. " + (int)(plant.AllStage % 60) + " сек.";
                 else
                     Inv.notifyPanel.transform.GetChild(0).GetComponent<Text>().text = "Готово к сбору!";
-                if (GetComponent<SpriteRenderer>().sortingOrder < 1000)
-                    GetComponent<SpriteRenderer>().sortingOrder += 1000;
             }
+            GetComponent<Renderer>().material.SetFloat("_OutlineOffSet", 10f);
+            if (GetComponent<SpriteRenderer>().sortingOrder < 1000)
+                GetComponent<SpriteRenderer>().sortingOrder += 1000;
         }
         else
         {
             Inv.notifyPanel.SetActive(false);
+            GetComponent<Renderer>().material.SetFloat("_OutlineOffSet", 0f);
             hover = false;
         }
     }
@@ -119,6 +115,7 @@ public class fild : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            GetComponent<Renderer>().material.SetFloat("_OutlineOffSet", 0f);
             if (GetComponent<SpriteRenderer>().sortingOrder > 1000)
             {
                 GetComponent<SpriteRenderer>().sortingOrder -= 1000;
@@ -142,7 +139,7 @@ public class fild : MonoBehaviour
     }
     public void ChangeWeed(bool val)
     {
-        weedSprite.SetActive(val);
+        transform.Find("Weed").gameObject.SetActive(val);
         if (!val)
             timeFactor -= 0.2f;
         else
@@ -151,7 +148,7 @@ public class fild : MonoBehaviour
     }
     public void ChangeVermin(bool val)
     {
-        verminSprite.SetActive(val);
+        transform.Find("Vermin").gameObject.SetActive(val);
         if (!val)
             timeFactor -= 0.2f;
         else
@@ -189,11 +186,12 @@ public class fild : MonoBehaviour
     }
     void Update()   // В методе апдейт происходит просчет роста растения
     {
-        transform.Find("plantSprite").GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
-        verminSprite.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 3;
-        weedSprite.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 2;
+        transform.Find("SaleSprite").GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
         if (plant != null)  // если растение существует продолжать просчет роста
         {
+            transform.Find("plantSprite").GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
+            transform.Find("Vermin").GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 3;
+            transform.Find("Weed").GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 2;
             plant.GrowingProces(timeFactor);  // метод просчета роста
             //Debug.Log(timeFactor +"            "+ Time.deltaTime);
         }

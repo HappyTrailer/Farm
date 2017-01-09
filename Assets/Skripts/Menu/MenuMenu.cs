@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class MenuMenu : MonoBehaviour
 {
@@ -40,11 +41,15 @@ public class MenuMenu : MonoBehaviour
     }
     public void Game()
     {
-        Application.LoadLevel(1);
+        SceneManager.LoadScene(1);
     }
     public void NewGame()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetFloat("Exp", 0);
+        PlayerPrefs.SetFloat("Level", 0);
+        PlayerPrefs.SetFloat("Money", 0);
+        PlayerPrefs.SetFloat("NextFild", 0);
+        PlayerPrefs.SetFloat("NewGame", 1);
         if (Directory.Exists(Application.dataPath + "/Saves"))
             Directory.Delete(Application.dataPath + "/Saves", true);
     }

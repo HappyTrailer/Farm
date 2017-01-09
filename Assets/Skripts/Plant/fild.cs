@@ -113,9 +113,10 @@ public class fild : MonoBehaviour
     }
     public void OnMouseExit()
     {
+        Inv.notifyPanel.SetActive(false);
+        GetComponent<Renderer>().material.SetFloat("_OutlineOffSet", 0f);
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            GetComponent<Renderer>().material.SetFloat("_OutlineOffSet", 0f);
             if (GetComponent<SpriteRenderer>().sortingOrder > 1000)
             {
                 GetComponent<SpriteRenderer>().sortingOrder -= 1000;

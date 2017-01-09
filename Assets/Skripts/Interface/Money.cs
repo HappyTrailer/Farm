@@ -22,8 +22,6 @@ public class Money : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     void Start()
     {
         money = PlayerPrefs.GetFloat("Money");
-        if (money < 50)
-            money = 500;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

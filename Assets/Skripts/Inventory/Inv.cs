@@ -135,10 +135,11 @@ public class Inv : MonoBehaviour {
             buff = (List<Item>)formater.Deserialize(fs);
             fs.Close();
         }
-        if (buff.Count == 0)
+        if(PlayerPrefs.GetFloat("NewGame") == 1)
         {
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
-            buff.Add(new ItemInInventory() { Id = 1, ItemType = "fertilizer", ItemCount = 10 });
+            buff.Add(new ItemInInventory() { Id = 1, ItemType = "fertilizer", ItemCount = 3 });
+            PlayerPrefs.SetFloat("NewGame", 0);
         }
         return buff;
     }

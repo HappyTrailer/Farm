@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.IO;
 
 public class GameMenu : MonoBehaviour {
@@ -69,14 +70,12 @@ public class GameMenu : MonoBehaviour {
     }
     public void Game()
     {
+        Inv.lockPanel.SetActive(false);
         menu.SetActive(false);
     }
     public void NewGame()
     {
-        PlayerPrefs.DeleteAll();
-        if (Directory.Exists(Application.dataPath + "/Saves"))
-            Directory.Delete(Application.dataPath + "/Saves", true);
-        Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
     public void Exit()
     {

@@ -34,9 +34,9 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
                     Inv.FillInventory("current");
                     Inv.Select(id);
                 }
+                GameObject.Find("Sounds").GetComponent<Sounds>().PlayBuy();
                 break;
             case "Plant":
-                transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
                 Inv.actionPanel.SetActive(false);
                 Inv.inventoryPanel.SetActive(false);
                 Inv.filterPanel.SetActive(false);

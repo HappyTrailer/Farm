@@ -75,7 +75,9 @@ public class GameMenu : MonoBehaviour {
     }
     public void NewGame()
     {
-        SceneManager.LoadScene(0);
+        Save s = new Save();
+        s.MySave();
+        Application.LoadLevel(0);
     }
     public void Exit()
     {

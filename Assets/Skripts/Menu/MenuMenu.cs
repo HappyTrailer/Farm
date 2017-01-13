@@ -11,6 +11,11 @@ public class MenuMenu : MonoBehaviour
 
     void Start()
     {
+        if (!File.Exists(Application.dataPath + "/Saves/ev.sv") || !File.Exists(Application.dataPath + "/Saves/inv.sv") ||
+            !File.Exists(Application.dataPath + "/Saves/fild.sv"))
+        {
+            NewGame();
+        }
         GameObject.Find("Audio Source").GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Music");
     }
 
@@ -41,7 +46,7 @@ public class MenuMenu : MonoBehaviour
     }
     public void Game()
     {
-        SceneManager.LoadScene(1);
+        Application.LoadLevel(1);
     }
     public void NewGame()
     {
@@ -49,7 +54,7 @@ public class MenuMenu : MonoBehaviour
         PlayerPrefs.SetFloat("Level", 0);
         PlayerPrefs.SetFloat("Money", 0);
         PlayerPrefs.SetFloat("NextFild", 0);
-        PlayerPrefs.SetFloat("NewGame", 1);
+        PlayerPrefs.SetFloat("GameExist", 0);
         if (Directory.Exists(Application.dataPath + "/Saves"))
             Directory.Delete(Application.dataPath + "/Saves", true);
     }

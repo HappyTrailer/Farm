@@ -135,11 +135,11 @@ public class Inv : MonoBehaviour {
             buff = (List<Item>)formater.Deserialize(fs);
             fs.Close();
         }
-        if(PlayerPrefs.GetFloat("NewGame") == 1)
+        if (PlayerPrefs.GetFloat("GameExist") == 0)
         {
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "fertilizer", ItemCount = 3 });
-            PlayerPrefs.SetFloat("NewGame", 0);
+            PlayerPrefs.SetFloat("GameExist", 1);
         }
         return buff;
     }
@@ -209,7 +209,7 @@ public class Inv : MonoBehaviour {
             else if (Inv.currentType == "sead")
                 k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Sead>().ItemId;
             else if (Inv.currentType == "fertilizer")
-                k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Sead>().ItemId;
+                k = inventoryPanel.transform.GetChild(0).gameObject.GetComponent<Fertilizer>().ItemId;
         }
         for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
@@ -262,7 +262,8 @@ public class Inv : MonoBehaviour {
 
     void OnApplicationQuit()
     {
-        SaveInv(items);
+        Save s = new Save();
+        s.MySave();
     }
 
     public void CancelBuy()

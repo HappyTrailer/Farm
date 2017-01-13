@@ -20,6 +20,8 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
                     itemId = Inv.currentHarv.ItemId;
                 else if(Inv.currentType == "sead")
                     itemId = Inv.currentSead.ItemId;
+                else if (Inv.currentType == "fertilizer")
+                    itemId = Inv.currentFert.ItemId;
                 Money.money += Inv.items[itemId].ItemPrice;
                 Inv.items[itemId].ItemCount -= 1;
                 if (Inv.items[itemId].ItemCount <= 0)

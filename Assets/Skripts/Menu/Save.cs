@@ -15,6 +15,7 @@ public class Save : MonoBehaviour
 
     public void MySave()
     {
+        Inv.SaveInv(Inv.items);
         filds = new List<SaveField>();
         foreach (Transform child in GameObject.Find("Field").transform)
         {

@@ -137,7 +137,7 @@ public class Inv : MonoBehaviour {
         }
         if (PlayerPrefs.GetFloat("GameExist") == 0)
         {
-            buff.Add(new ItemInInventory() { Id = 1, ItemType = "sead", ItemCount = 10 });
+            buff.Add(new ItemInInventory() { Id = 6, ItemType = "sead", ItemCount = 10 });
             buff.Add(new ItemInInventory() { Id = 1, ItemType = "fertilizer", ItemCount = 3 });
             PlayerPrefs.SetFloat("GameExist", 1);
         }

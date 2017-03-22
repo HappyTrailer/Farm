@@ -64,7 +64,7 @@ public class PlantList : MonoBehaviour {
         seads.Add(new PlantItem()
         {
             id = 3,
-            name = "Картофель",
+            name = "Картошка",
             level = 5,
             time = 45,
             price = 12,
@@ -103,7 +103,7 @@ public class PlantList : MonoBehaviour {
         seads.Add(new PlantItem()
         {
             id = 6,
-            name = "Перец красный",
+            name = "Перец",
             level = 16,
             time = 90,
             price = 35,

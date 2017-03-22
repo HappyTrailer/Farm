@@ -230,8 +230,7 @@ public class Plant : MonoBehaviour
         {
             int countEv = UnityEngine.Random.Range(mincountFruit, maxcountFruit);
             Inv.GetHarvestToInventory(countEv, fruitId, "harvest");
-            lvl.AddExp(countExpiriens);
-            ExpBar.current = lvl.countExperience;
+            ExpBar.AddExp(countExpiriens);
             if (iterationFruit >= 1)
             {
                 iterationFruit--;

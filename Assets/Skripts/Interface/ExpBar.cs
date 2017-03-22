@@ -5,8 +5,6 @@ using System.Collections;
 
 public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public static float max;
-    public static float current;
     public Image scr;
     public Text txt;
     public Text lvlTxt;
@@ -15,22 +13,44 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private float change = 0;
 
-	void Update () {
+    public static float max;
+    public static int countExperience;
+    public static int currentCountlvl;
+    public static int[] masLvl = new int[] {20,40,80,160,320,480,720,1080,1944,2527,3285,4270,5552,7217,9382,12197,15857,20614,26798,34837,45289,58876,76539,99500};
+
+	void Update ()
+    {
         AnimExp();
-        lvlTxt.text = lvl.currentCountlvl.ToString();
-        scr.fillAmount = current / max;
-        txt.text = (current / max * 100).ToString("F2") + "%";
-        notifyText.text = current + " / " + max;
-        PlayerPrefs.SetFloat("Exp", lvl.countExperience);
-        PlayerPrefs.SetFloat("Level", lvl.currentCountlvl);
+        lvlTxt.text = currentCountlvl.ToString();
+        scr.fillAmount = countExperience / max;
+        txt.text = (countExperience / max * 100).ToString("F2") + "%";
+        notifyText.text = countExperience + " / " + max;
+        PlayerPrefs.SetFloat("Exp", countExperience);
+        PlayerPrefs.SetFloat("Level", currentCountlvl);
 	}
 
     void Start ()
     {
-        lvl.currentCountlvl = (int)PlayerPrefs.GetFloat("Level");
-        lvl.countExperience = (int)PlayerPrefs.GetFloat("Exp"); 
-        current = (int)PlayerPrefs.GetFloat("Exp");
-        max = lvl.masLvl[lvl.currentCountlvl];
+        Application.runInBackground = true;
+        currentCountlvl = (int)PlayerPrefs.GetFloat("Level");
+        countExperience = (int)PlayerPrefs.GetFloat("Exp");
+        max = masLvl[currentCountlvl];
+    }
+
+    public static void AddExp(int x)
+    {
+        countExperience += x;
+        countExperience = GotNextLvl();
+    }
+
+    static int GotNextLvl()
+    {
+        if (countExperience < masLvl[currentCountlvl])
+            return countExperience;
+        countExperience -= masLvl[currentCountlvl];
+        currentCountlvl++;
+        max = masLvl[currentCountlvl];
+        return GotNextLvl();
     }
 
     private void AnimExp()

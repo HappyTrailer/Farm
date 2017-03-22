@@ -37,7 +37,7 @@ public class PlantItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (Money.money >= this.price && lvl.currentCountlvl >= this.level)
+        if (Money.money >= this.price && ExpBar.currentCountlvl >= this.level)
         {
             Money.money -= this.price;
             Inv.GetHarvestToInventory(1, this.id, "sead");

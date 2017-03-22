@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 ".\n Время роста: " + ((itemsS[i].time * 4) /60).ToString() + " мин.";
             shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Buy").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Plant/Buy");
             shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Price").GetComponent<Text>().text = itemsS[i].price.ToString();
-            if (lvl.currentCountlvl >= itemsS[i].level)
+            if (ExpBar.currentCountlvl >= itemsS[i].level)
             {
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Button").gameObject.AddComponent<PlantItem>().Init(itemsS[i]);
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Lock").gameObject.SetActive(false);
@@ -34,6 +34,7 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             }
             else
             {
+                shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Text").gameObject.SetActive(false);
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Button").gameObject.GetComponent<Button>().enabled = false;
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).Find("Lock").gameObject.SetActive(true);
                 shopPanel.transform.GetChild(0).GetChild(0).GetChild(i).GetComponent<Image>().color = new Color32(150, 125, 0, 255);

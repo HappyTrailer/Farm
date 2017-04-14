@@ -20,7 +20,6 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	void Update ()
     {
-        AnimExp();
         lvlTxt.text = currentCountlvl.ToString();
         scr.fillAmount = countExperience / max;
         txt.text = (countExperience / max * 100).ToString("F2") + "%";
@@ -51,20 +50,6 @@ public class ExpBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         currentCountlvl++;
         max = masLvl[currentCountlvl];
         return GotNextLvl();
-    }
-
-    private void AnimExp()
-    {
-        float color = scr.color.r;
-        if (color >= 1)
-        {
-            change = -0.002f;
-        }
-        else if (color <= 0.8f)
-        {
-            change = 0.002f;
-        }
-        scr.color = new Color(color + change, color + change, color + change, 255);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

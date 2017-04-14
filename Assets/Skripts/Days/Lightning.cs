@@ -64,8 +64,8 @@ public class Lightning : MonoBehaviour
 
         timeCounter = currentTime * oneUnitTime;
 
-        float x = (float)Math.Sin(timeCounter) * 60;
-        float y = (float)Math.Cos(timeCounter) * 25;
+        float x = (float)Math.Sin(timeCounter) * 20;
+        float y = (float)Math.Cos(timeCounter) * 7;
 
         sun.transform.localPosition = new Vector3(-x, -y, 0);
         mon.transform.localPosition = new Vector3(x, y, 0);

@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CloudsMove : MonoBehaviour 
+public class CloudsMove : MonoBehaviour
 {
+    public BoxCollider2D Bounds;
+    private float size;
     public GameObject[] clouds;
-    public GameObject left; 
-    public GameObject right;
     private SortedList<float, GameObject> cloudsWithSpeed;
 	
     void Start ()
@@ -22,15 +22,16 @@ public class CloudsMove : MonoBehaviour
             cloud.Value.GetComponent<SpriteRenderer>().sortingOrder += k;
             k++;
         }
+        size = Bounds.bounds.size.x / 2;
     }
 
 	void Update () 
     {
         foreach (var cloud in cloudsWithSpeed)
         {
-            if (cloud.Value.transform.position.x >= right.transform.position.x)
-                cloud.Value.transform.position = left.transform.position;
-            cloud.Value.transform.position += new Vector3(cloud.Key, 0, 0);
+            if (cloud.Value.transform.position.x >= size + cloud.Value.GetComponent<Renderer>().bounds.size.x / 2)
+                cloud.Value.transform.position = new Vector3(-size - cloud.Value.GetComponent<Renderer>().bounds.size.x / 2, cloud.Value.transform.position.y, cloud.Value.transform.position.z);
+            cloud.Value.transform.position += new Vector3(cloud.Key * 0.05f, 0, 0);
         }
 	}
 }

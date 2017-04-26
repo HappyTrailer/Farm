@@ -46,7 +46,7 @@ public class ActionPanel : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
                     ToolsClick.currentTool = "fertilizer";
                 else
                     ToolsClick.currentTool = "planted";
-                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/cartoon-seeds");
+                Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/cartoon-seeds2"), Vector2.zero, CursorMode.Auto);
                 Inv.lockPanelInv.SetActive(false);
                 break;
         }

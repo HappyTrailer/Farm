@@ -33,7 +33,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         if (this.name == "inventory")
         {
             ToolsClick.currentTool = "arrow";
-            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+            Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
             if (Inv.inventoryPanel.activeSelf == false)
             {
                 Inv.lockPanelInv.SetActive(true);
@@ -53,7 +53,7 @@ public class ToolCoice : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         }
         else
         {
-            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + this.name);
+            Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/" + this.name + "2"), Vector2.zero, CursorMode.Auto);
             ToolsClick.currentTool = this.name;
         }
 	}

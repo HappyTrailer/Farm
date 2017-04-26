@@ -8,7 +8,7 @@ public class MouseTool : MonoBehaviour {
         if (Input.GetMouseButtonDown(2) && GameMenu.settingsPanel.activeSelf == false && GameMenu.menuPanel.activeSelf == false)
         {
             ToolsClick.currentTool = "arrow";
-            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+            Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
             if (Shop.shopPanel.activeSelf == false)
             {
                 Inv.actionPanel.SetActive(false);
@@ -28,7 +28,7 @@ public class MouseTool : MonoBehaviour {
         if (Input.GetMouseButtonDown(1) && GameMenu.settingsPanel.activeSelf == false && GameMenu.menuPanel.activeSelf == false)
         {
             ToolsClick.currentTool = "arrow";
-            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+            Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
             if (Inv.inventoryPanel.activeSelf == false)
             {
                 Inv.lockPanelInv.SetActive(true);
@@ -78,7 +78,7 @@ public class MouseTool : MonoBehaviour {
                         ToolsClick.currentTool = "arrow";
                         break;
                 }
-                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolsClick.currentTool);
+                Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/" + ToolsClick.currentTool + "2"), Vector2.zero, CursorMode.Auto);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
@@ -109,7 +109,7 @@ public class MouseTool : MonoBehaviour {
                         ToolsClick.currentTool = "arrow";
                         break;
                 }
-                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/" + ToolsClick.currentTool);
+                Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/" + ToolsClick.currentTool + "2"), Vector2.zero, CursorMode.Auto);
             }
         }
 	}

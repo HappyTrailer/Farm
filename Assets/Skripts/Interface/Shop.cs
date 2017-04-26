@@ -71,7 +71,8 @@ public class Shop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public void OnPointerClick(PointerEventData eventData)
     {
         ToolsClick.currentTool = "arrow";
-        ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+
+        Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
         if (shopPanel.activeSelf == false)
         {
             Inv.actionPanel.SetActive(false);

@@ -15,12 +15,10 @@ public class ToolsClick : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	private Image img;
     private Image seno;
     private bool hover = false;
-    public static Image globalCursor;
     public static string currentTool = "arrow";
 
 	void Start()
     {
-        globalCursor = GameObject.Find("Cursor").GetComponent<Image>();
         seno = CountryImg.transform.GetChild(0).GetComponent<Image>();
 		img = CountryImg.transform.GetChild(1).GetComponent<Image>();
 		//tools = FindTools("Tool");

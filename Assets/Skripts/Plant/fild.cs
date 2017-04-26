@@ -255,7 +255,7 @@ public class fild : MonoBehaviour
                         if (Inv.items[Inv.currentFert.ItemId].ItemCount <= 0)
                         {
                             ToolsClick.currentTool = "arrow";
-                            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                            Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
                             Inv.DropItem(Inv.currentFert.ItemId);
                         }
                         GameObject.Find("Sounds").GetComponent<Sounds>().PlayFert();
@@ -289,7 +289,7 @@ public class fild : MonoBehaviour
                         if (Inv.items[Inv.currentSead.ItemId].ItemCount <= 0)
                         {
                             ToolsClick.currentTool = "arrow";
-                            ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                            Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
                             Inv.DropItem(Inv.currentSead.ItemId);
                         }
 
@@ -314,7 +314,7 @@ public class fild : MonoBehaviour
                 Inv.currFild = this;
                 GameObject.Find("PriceFild").GetComponent<Text>().text = (idFild * 10 * 1.5).ToString();
                 ToolsClick.currentTool = "arrow";
-                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
                 Inv.lockPanelInv.SetActive(true);
             }
         }

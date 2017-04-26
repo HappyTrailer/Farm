@@ -49,7 +49,7 @@ public class GameMenu : MonoBehaviour {
             else if (!menu.activeSelf)
             {
                 ToolsClick.currentTool = "arrow";
-                ToolsClick.globalCursor.sprite = Resources.Load<Sprite>("Sprite/InstrumentsPanel/arrow");
+                Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
                 Inv.lockPanel.SetActive(true);
                 menu.SetActive(true);
             }

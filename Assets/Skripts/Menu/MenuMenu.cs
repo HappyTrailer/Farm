@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 public class MenuMenu : MonoBehaviour
 {
     public GameObject settings;
-    public GameObject cursor;
 
     void Start()
     {
+        Cursor.SetCursor(Resources.Load<Texture2D>("Sprite/InstrumentsPanel/arrow2"), Vector2.zero, CursorMode.Auto);
         if (!File.Exists(Application.dataPath + "/Saves/ev.sv") || !File.Exists(Application.dataPath + "/Saves/inv.sv") ||
             !File.Exists(Application.dataPath + "/Saves/fild.sv"))
         {
@@ -28,7 +28,6 @@ public class MenuMenu : MonoBehaviour
                 settings.SetActive(false);
             }
         }
-        cursor.transform.position = new Vector3(Input.mousePosition.x + 5, Input.mousePosition.y - 10, 0);
     }
 
     public void Setting()
